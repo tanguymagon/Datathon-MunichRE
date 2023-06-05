@@ -1,0 +1,32 @@
+import pandas as pd
+import numpy as np
+from multiprocessing import Pool, cpu_count
+from rapidfuzz import fuzz, process
+
+# Let's assume df1 and df2 are your DataFrames and 'col1', 'col2' are the columns you want to compare
+
+def match_strings(row):
+    matches = process.extractOne(row['col1'], df2['col2'].tolist(), scorer=fuzz.token_set_ratio, score_cutoff=96)
+    if matches:
+        return matches[0]
+    else:
+        return None
+
+def process_chunk(df_chunk):
+    df_chunk['matches'] = df_chunk.apply(match_strings, axis=1)
+    return df_chunk
+
+# Split the df1 DataFrame into chunks
+chunks = np.array_split(df1, cpu_count())
+
+# Create a multiprocessing Pool
+pool = Pool(cpu_count())
+
+# Process each chunk in parallel
+results = pool.map(process_chunk, chunks)
+
+# Combine the results
+df1 = pd.concat(results)
+
+# Close the pool
+pool.close()
