@@ -1,27 +1,6 @@
-Le coût : Pour calculer le coût, nous devons d'abord déterminer le nombre total de jetons utilisés au cours d'un mois.
-
-Si chaque invite coûte en moyenne 1 500 jetons et que vous en faites 1 200 par jour, votre utilisation quotidienne de jetons est la suivante :
-
-1200 invites/jour * 1500 jetons/incite = 1 800 000 jetons/jour.
-
-Sur un mois (disons 30 jours pour simplifier), cela revient à :
-
-1 800 000 jetons/jour * 30 jours = 54 000 000 jetons/mois.
-
-À un coût de 0,02 $ pour 1 000 jetons, le coût total sera de :
-
-54 000 000 jetons/mois * (0,02 $ / 1000 jetons) = 1080 $/mois.
-
-Temps d'exécution : Pour calculer le temps d'exécution, nous devons connaître la limite de jetons et de requêtes par minute.
-
-Votre limite totale de jetons est de 40 000 jetons/minute. Étant donné que chaque demande représente en moyenne 1500 jetons, vous pouvez émettre :
-
-40 000 jetons/minute / 1500 jetons/prompt = ~26,67 prompts/minute.
-
-Cependant, vous avez également une limite de 120 requêtes par minute, ce qui est beaucoup plus que les ~26,67 invites que vous pouvez émettre sur la base du nombre de jetons. C'est donc la limite de jetons qui constitue le goulot d'étranglement.
-
-Si vous émettez 26,67 invites par minute et que vous avez 1200 invites à exécuter chaque jour, le temps total nécessaire sera le suivant :
-
-1200 invites/jour / 26,67 invites/minute = ~45 minutes/jour.
-
-Veuillez noter qu'il s'agit d'un calcul simplifié et que le coût et le temps d'exécution réels peuvent varier en fonction de plusieurs facteurs, notamment la latence du réseau, la longueur spécifique de chaque texte (puisque nous avons utilisé des moyennes), le nombre réel de jours dans le mois, les changements potentiels dans les limites de taux et la tarification d'OpenAI, et d'autres facteurs. N'oubliez pas non plus de gérer les erreurs d'API et les tentatives dans votre code, ce qui peut affecter le temps d'exécution.
+sudo su
+curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+curl https://packages.microsoft.com/config/debian/10/prod.list > /etc/apt/sources.list.d/mssql-release.list
+exit
+sudo apt-get update
+sudo ACCEPT_EULA=Y apt-get install -y msodbcsql17
