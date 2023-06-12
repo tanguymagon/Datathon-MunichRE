@@ -1,6 +1,25 @@
-sudo su
-curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
-curl https://packages.microsoft.com/config/debian/10/prod.list > /etc/apt/sources.list.d/mssql-release.list
-exit
-sudo apt-get update
-sudo ACCEPT_EULA=Y apt-get install -y msodbcsql17
+SELECT DISTINCT phrases.an
+    ,articles.date
+FROM [dbo].[phrases], [dbo].[articles], [dbo].[contreparties]
+WHERE phrases.an = articles.an AND phrases.siren_contrepartie = contreparties.siren AND articles.date BETWEEN '2023-01-01' AND '2023-06-01' AND contreparties.raison_sociale IN ('20 TSQ LESSEE LLC',
+ 'ANTIN INFRASTRUCTURE PARTNERS II-1 - FCPI',
+ 'AZOTO- FONDO COMUNE DI INVESTIMENTO ALTERNATIVO IMMOBILIARE RISERVATO',
+ 'CHARMONDEL HOLDINGS LTD',
+ 'COMMUNE DE SAINT ETIENNE',
+ 'FLEX INTERMEDIATE HOLDCO LLC',
+ 'GEISMAR',
+ 'GHANA COCOA BOARD (COCOBOD)',
+ 'JONAH ENERGY LLC',
+ 'KERNEL HOLDING S.A.',
+ 'LABORATOIRE FRANCAIS DU FRACTIONNEMENT ET DES BIOTECHNOLOGIES',
+ 'LATAM AIRLINES GROUP SA',
+ 'SOCIETE EDITRICE DU MONDE',
+ 'LOV GROUP INVEST',
+ 'DNA PARADIS GROUP',
+ 'GROUPE PEOPLE AND BABY SAS',
+ 'SENVION SE',
+ 'SERCIB France',
+ 'SOCIETE DES HYDROCARBURES DU TCHAD',
+ 'VALLOUREC',
+ 'ZF INVEST')
+ORDER BY [date]
