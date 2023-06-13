@@ -1,59 +1,18 @@
-Tourné autour des analyses 
-Les autres banques ?? Initiatives Benchmark 
-Par contre - 
+Bonsoir à tous,
+
+Pour faire suite à notre brainstorm voici les points essentiels à retenir : 
+
+Contexte : Besoin d’un « analyste augmenté » capable d’analyser les données de la base standardisée des états financiers et construire des rapports sur une ou plusieurs contreparties identifiées. 
+Nice to have : Possibilité de poser des questions comme « comment la pharmacie sur laquelle je suis exposé actuellement se comporte par rapport aux autres pharmacies du portefeuille »
 
 
-Optimisation du sourcing -- travaux supplémentaire -- sur ce sujet -- 
+Points à retenir
+-	Cas d’usages : Besoin d’identifier les différents cas d’usages métiers – affinage et priorisation 
+-	GenAI : 
+o	Différence à bien établir entre GenAI et « IA classique » la GenAI ne saura pas quoi faire des chiffres présents dans la base standardisée 
+o	Besoin d’IA classique en amont pour faire les analyses statistiques
+o	Potentiels cas d’usages : questions sur rapports financiers publiés ou sur les Cerfa
+-	Surveillance continue : voir comment on peut coupler l’application aux cas d’usages (par exemple analyse des secteurs qui peuvent potentiellement impacter une ou plusieurs contreparties
 
-Etablissement visite BP AK : 
-	- Besoin de benchmark de contrepartie- Paris 16 - comparaison avec toute les autres pharmacies
+Next steps : 
 
-Benjamin
-	- Notion de zone, taille d'entreprise, secteur, critère cycle de développement (lancement vs mature)
-	- Développement d'indices ou est-ce qu'il en ai justement en terme, en terme d'opportunité d'analyse de business
-
-Des gens -- 
-Limite des - descripitf 
-Telle contrepartie - pré-analyse descriptive
-
-Besoin de texte en amont ? 
-On lui donne des chiffres - on constate une amélioration ou pas ? 
-Iseop ? On contruit les comportements remarquables 
-
-
-La on a de liasses fiscales - document cerfa - capable d'extraire les infos nécessaires
-
-Question de flux - Virginie bougendare - 
-
-Pas correctement rempli dans les cerfa - si il y a une erreur alors -- rapport d'erreur possible  ?
-
-Moins le sujet - pas sur le dépouillement 
-Aussi preneur -- l'exploitation de ce type de base bilan -- vous pouvez voir aussi par ailleurs
-
-
-Dernière brique de l'IA -- pour telle description -- le cas d'usage final 
-Premier constat par l'IA -et après ils creusent 
-
-
-Sabine des analystes spécialisés - dashboard de surveillance - globalement il y a du risques 
-Analystes sur toutes les poches pas de report sur les risques
-
-2 axes poches - quels sont les critères pour définir les poches - alerte indicateurs par exemple habillement, le CRE, commerciale real estate ? 
-2 quels sont les indicateurs qui peuvent être une fourchette de comportement 
-Critère qui définit la poche - très hétérogène
-Définir la matrice pour une date et la même 
-Moteur des points
-
-Data science classique - pourquoi pas à terme de l'IA Gen
-Mais à la limite ?
-
-Aller voir les métiers - quels sont les indicateurs - exprimer un besoin informe - expression de besoin 
-On peut pas coupler --- SCR on va résumer à la maille secteur - sur les trois derniers mois -- les analystes 
-
-Note d'analyse financière ??
-Tous les analystes ne se valent pas - un bon analyste 
-
-Article de presse 
-
-Data science classique 
-Les données qui répondent à la question ? Grâce pour répondre à cette question 
