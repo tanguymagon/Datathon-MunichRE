@@ -1,22 +1,17 @@
-Bonsoir à tous,
-
-Pour faire suite à notre brainstorm voici les points essentiels à retenir : 
-
-Contexte : Besoin d’un « analyste augmenté » capable d’analyser les données de la base standardisée des états financiers et construire des rapports sur une ou plusieurs contreparties identifiées. 
-Nice to have : Possibilité de poser des questions comme « comment la pharmacie sur laquelle je suis exposé actuellement se comporte par rapport aux autres pharmacies du portefeuille »
-
-
-Points à retenir
--	Cas d’usages : Besoin d’identifier les différents cas d’usages métiers – affinage et priorisation 
--	GenAI : 
-o	Différence à bien établir entre GenAI et "Data Science" les LLM, Gen ne sont pas conçus pour faire des opérations mathématiques
-o	Besoin d’IA classique en amont pour faire les analyses statistiques
-o	Potentiels cas d’usages : questions, rédaction automatiques, explication textuelle du problème sur rapports financiers publiés ou sur les Cerfa
--	Surveillance continue : voir comment on peut coupler l’application aux cas d’usages (par exemple analyse des secteurs qui peuvent potentiellement impacter une ou plusieurs contreparties
-
-Next steps : 
-- Deuxième crénau de brainstorm à fixer rapidement
-- se faire une idée très spécifique des besoins potentiels et des use-cases.
+import pyodbc
+import pandas as pd
+# Some other example server values are
+# server = 'localhost\sqlexpress' # for a named instance
+# server = 'myserver,port' # to specify an alternate port
+server = 'iam-serveur.database.windows.net'
+database = 'surveillance_risque_credit'
+username = 'iam-admin'
+password = 'NLPinBPCE!2'
+cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+ password)
+cursor = cnxn.cursor()
+# select 26 rows from SQL table to insert in dataframe.
+query = "SELECT * FROM articles WHERE is_doublon=0 AND date>='2022-01-01' AND date<'2023-06-01';"
+df_articles = pd.read_sql(query, cnxn)
 
 
 
