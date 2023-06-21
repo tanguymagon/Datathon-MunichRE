@@ -1,44 +1,14 @@
-server = 'iam-serveur.database.windows.net' 
-database = 'surveillance_risque_credit' 
-username = 'iam-admin' 
-password = 'NLPinBPCE!2' 
-    
-def get_database_credentials() -> dict:
-    config_dict = {}
-    config_dict['AZURE_SQL_DATABASE'] = database
-    config_dict['AZURE_SQL_SERVER'] = server
-    config_dict['AZURE_SQL_USER'] = username
-    config_dict['AZURE_SQL_PASSWORD'] = password
-    drivers = [item for item in pyodbc.drivers()]
-    config_dict['AZURE_SQL_DRIVER'] = '{ODBC Driver 17 for SQL Server}'
-
-    return config_dict
-  
-def generate_database_engine():
-        print("Generating connection parameters ...")
-        database_credentials = get_database_credentials()
-        connection_string = 'DRIVER={ODBC Driver 17 for SQL Server};\
-                SERVER=' + database_credentials['AZURE_SQL_SERVER'] +\
-                ';DATABASE=' + database_credentials['AZURE_SQL_DATABASE'] +\
-                ';UID=' + database_credentials['AZURE_SQL_USER'] +\
-                ';PWD=' + database_credentials['AZURE_SQL_PASSWORD'] 
-        quoted_string = quote_plus(connection_string)
-        engine = create_engine(f'mssql+pyodbc:///?odbc_connect={quoted_string}')
-        print("Params successfully generated!")
-        connection_is_successfull = False
-        number_of_connections_attempt = 0
-        while connection_is_successfull is False :
-                number_of_connections_attempt += 1
-                try:
-                        with engine.connect() as connection:
-                                result = connection.execute("SELECT @@version;")
-                                print("Successfully Connected to database")
-                        return engine
-                except OperationalError :
-                        print(f"Connection attempt number \
-                        {number_of_connections_attempt} failed. Let's retry")
-                        return None
-  cnxn = generate_database_engine()
+import pyodbc
+import pandas as pd
+# Some other example server values are
+# server = 'localhost\sqlexpress' # for a named instance
+# server = 'myserver,port' # to specify an alternate port
+server = 'iam-serveur.database.windows.net'
+database = 'surveillance_risque_credit'
+username = 'iam-admin'
+password = 'NLPinBPCE!2'
+cnxn = pyodbc.connect('DRIVER={ODBC Driver 18 for SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+ password)
+cursor = cnxn.cursor()
 # select 26 rows from SQL table to insert in dataframe.
-#df = [mettre les données]
-nom_pandas.to_sql(name='nom_table', con=cnxn, if_exists='replace', index=False, chunksize=200)
+query = "SELECT an,publication_date,publication_datetime,company_codes FROM brut WEHERE publication_date>='2022-01-01' AND publication_date<'2023-06-01' ;"
+df_brut = pd.read_sql(query, cnxn)
