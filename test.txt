@@ -1,14 +1,51 @@
-import pyodbc
+import time
+import numpy as np
 import pandas as pd
-# Some other example server values are
-# server = 'localhost\sqlexpress' # for a named instance
-# server = 'myserver,port' # to specify an alternate port
-server = 'iam-serveur.database.windows.net'
-database = 'surveillance_risque_credit'
-username = 'iam-admin'
-password = 'NLPinBPCE!2'
-cnxn = pyodbc.connect('DRIVER={ODBC Driver 18 for SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+ password)
-cursor = cnxn.cursor()
-# select 26 rows from SQL table to insert in dataframe.
-query = "SELECT an,publication_date,publication_datetime,company_codes FROM brut WEHERE publication_date>='2022-01-01' AND publication_date<'2023-06-01' ;"
-df_brut = pd.read_sql(query, cnxn)
+import pyodbc
+from multiprocessing import Pool, cpu_count
+from fuzzywuzzy import fuzz, process
+
+class StringMatcher:
+    def __init__(self, excel_file, colonne_to_search):
+        self.server = "iam-serveur.database.windows.net"
+        self.database = "surveillance_risque_credit"
+        self.username = "iam-admin"
+        self.password = "NLPinBPCE!2"
+        self.driver = "{ODBC Driver 17 for SQL Server}"
+        self.entity_to_search = colonne_to_search
+        self.df1 = self.read_sql("SELECT * FROM phrases_90_anomalies WHERE type_entite = 'company';").drop_duplicates("entite")
+        self.df2 = pd.read_excel(excel_file, sheet_name=0, engine='openpyxl')
+        self.start = time.time()
+        self.prepare_data()
+
+    def get_sql_connection(self):
+        connection_str = f"DRIVER={self.driver};SERVER={self.server};DATABASE={self.database};UID={self.username};PWD={self.password}"
+        return pyodbc.connect(connection_str)
+
+    def read_sql(self, query):
+        con = self.get_sql_connection()
+        return pd.read_sql(sql=query, con=con)
+    
+    def prepare_data(self):
+        self.df1["entite"] = self.df1["entite"].str.lower()
+        self.df2['Nom du groupe'] = self.df2['Nom du groupe'].str.lower()
+    
+    def match_strings(self, row):
+        matches = process.extractOne(row['entite'], self.df2[self.colonne_to_search].tolist(), scorer=fuzz.ratio, score_cutoff=96)
+        if matches:
+            return matches[0]
+        else:
+            return None
+
+    def process_chunk(self, df_chunk):
+        df_chunk['matches'] = df_chunk.apply(self.match_strings, axis=1)
+        return df_chunk
+
+    def perform_matching(self):
+        chunks = np.array_split(self.df1, cpu_count())
+        pool = Pool(cpu_count())
+        results = pool.map(self.process_chunk, chunks)
+        df_results = pd.concat(results)
+        pool.close()
+        print("Time taken for the matching: ", time.time() - self.start)
+        return df_results
