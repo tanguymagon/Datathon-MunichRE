@@ -1,81 +1,58 @@
-libname gui '/sasprod/etude/DRCCP_MODELISATION/gdrouetdau';
-%let date=03072023;
+class DavinciNer:
+    TOKENS_PAR_MINUTE = 60000
+    REQUESTS_PAR_MINUTE = 360
+    SECONDS = 60
 
-proc sql;
-create table gui.rft_histo&date as 
-select distinct b.ID_FEDERAL, b.date_arrete,
-coalesce(a.REMETTANT_CODE, b.BANQUE_REFERENTE_CODE) as REMETTANT, a.ID_LOCAL,a.date_arrete as date_arrete_local,
-coalesce(a.REMETTANT_LIB,b.BANQUE_REFERENTE_lib) as lib_remettant , b.OUTIL_NOTATION_CIBLE_CODE,
-b.CLASSIFICATION_TAILLE_ENT_CODE,
-b.NOM_USAGE_BPCE, b.RAISON_SOCIALE, b.NAF_2_CODE,b.bvd_id,
-b.NAF_2_LIB, b.CATEGORIE_JURIDIQUE_CODE, b.CATEGORIE_JURIDIQUE_LIB,
-b.ETABLISSEMENT_PRINCIPAL,b.PAYS_NATIONALITE_CODE, b.PAYS_RESIDENCE_CODE,
-b.SIREN,b.SEGMENT_RISQUE_CODE,b.PAYS_RISQUE_CODE,b.BANQUE_REFERENTE_CODE, 
-b.ID_NIE,b.SOUS_SECTEUR_ACTIVITE_CODE,b.SOUS_SECTEUR_ACTIVITE_LIB,c.*,
-d.TIERS_PERE_ULTIME,d.NATURE_LIEN_GRAPPAGE_CODE as NATURE_LIEN_GRAPPAGE_CODE_nat,
-d.CODE_GROUPE, e.LIBELLE_GROUPE as LIBELLE_GROUPE_nat, f.COD_BQ_MERE_REG
-from 
-(	
-select distinct * 
-	from rft.H_rft_tiers_golden (where=(EST_ACTIF='Y')) 
-	where SEGMENT_RISQUE_CODE NOT IN ('1050', '1011') 
-	and BANQUE_REFERENTE_CODE NOT IN ('MOTEUR', '99999', 'BACKUP', 'BVD', 'NIE')
-	group by id_federal
-	having DATE_ARRETE=max(DATE_ARRETE)
-) b 
-left join 
-(	select * 
-	from rft.H_rft_id_locaux 
-	(where=(EST_ACTIF='Y')) 
-	where REMETTANT_CODE NOT IN ('MOTEUR', '99999', 'BACKUP', 'BVD', 'NIE')
-	group by id_federal,ID_LOCAL
-	having DATE_ARRETE=max(DATE_ARRETE) 
-)  a on a.ID_FEDERAL=b.ID_FEDERAL
-left join rft.rft_grappage_local (drop= DATE_ARRETE IDENTIFIANT_LOCAL 
-CODE_SOUS_GROUPE LIBELLE_SOUS_GROUPE DATE_CHARGEMENT_GRAPPAGE MAISON_MERE_CODE 
-MAISON_MERE_LIB DATE_CHARGEMENT REMETTANT_LIB) c on a.id_federal=c.tiers_fils 
-and b.BANQUE_REFERENTE_CODE=c.REMETTANT_CODE
-left join rft.rft_grappage_national d on a.id_federal=d.tiers_fils
-left join rft.rft_groupe (where=(ACTIF='Y'))  e on d.CODE_GROUPE=e.CODE_GROUPE
-left join ref.ref_bq_bfbp f on coalesce(a.REMETTANT_CODE, b.BANQUE_REFERENTE_CODE)=f.cod_bq
-;
-quit; 
+    def __init__(self, engine="davinci-003", tokenizer=None):
+        self.engine = engine
+        self.tokenizer = tokenizer
 
-proc sql;
-create table gui.bilan&date as 
-select distinct a.*, b.TYPE_BILAN_CODE, b.DUREE_EXERCICE, b.DATE_BILAN, b.DEVISE_CODE, b.CHIFFRE_AFFAIRES,
-c.TYPE_BILAN_CODE as TYPE_BILAN_CODE_C, c.DUREE_EXERCICE as DUREE_EXERCICE_C, c.DATE_BILAN as DATE_BILAN_C,
-c.CHIFFRE_AFFAIRES as CHIFFRE_AFFAIRES_c ,
-c.DEVISE_CODE as DEVISE_CODE_C 
-from gui.rft_histo&date (where=(REMETTANT NOT IN ('MOTEUR', '99999', 'BACKUP', 'BVD', 'NIE'))) a
-left join 
-(select * from rft.RFT_BILANS (where=(TYPE_BILAN_CODE='S')) 
-group by ID_FEDERAL having DATE_BILAN=max(DATE_BILAN) ) b on a.ID_FEDERAL=b.ID_FEDERAL
-left join 
-(select * from rft.RFT_BILANS (where=(TYPE_BILAN_CODE='C') )
-group by ID_FEDERAL having DATE_BILAN=max(DATE_BILAN) ) c on a.ID_FEDERAL=c.ID_FEDERAL;
-quit;
+    def get_num_tokens(self, text): 
+        return len(self.tokenizer(text)["input_ids"])
 
-proc sql;
-create table gui.bilan_add_&date as 
-select distinct a.*, b.*
-from gui.bilan&date a
-left join rft.H_RFT_ADRESSES_GOLDEN (drop=DATE_CHARGEMENT) b on a.ID_FEDERAL=b.ID_FEDERAL
-and a.DATE_ARRETE=b.DATE_ARRETE;
-quit;
+    def ner(self, df):
+        results = []
+        total_tokens = 0
+        retry_after = 1  # temps de delai initié
 
+        for i, row in df.iterrows():
+            text = row['Phrase']
 
-PROC EXPORT DATA=gui.bilan_add_&date   
-outfile="'/sasprod/etude/DRCCP_MODELISATION/gdrouetdau/bilan_add_&date..csv'"
-DBMS=csv 
-replace;
-DELIMITER=";";
-run;
+            prompt = f"When you are 100% sure, do an NER and retrieve the company or business (ORG), the person (PER), the location (LOC) and the miscellaneous (MISC) in the following python dictionary format, fill the list in double quotes and delete apostrophes, when you are not 100% sure, do not write anything : {{'ORG': [], 'LOC': [], 'PER': [], 'MISC': []}} on this text :\n {text}\n"
 
-proc sql;
-create table test as 
-select distinct a.*, count(*) as nb
-from gui.bilan_add_&date a
-group by id_federal, id_local;
-quit;
+            num_tokens = self.get_num_tokens(prompt)
+            total_tokens += num_tokens
+
+            while True: 
+                try:
+                    # contraintes définies
+                    if total_tokens > self.TOKENS_PAR_MINUTE or i >= self.REQUESTS_PAR_MINUTE:
+                        sleep(self.SECONDS * 1.1)  # attente de plus d'une minute 
+                        total_tokens = num_tokens  # reset des tokens
+
+                    response = openai.Completion.create(
+                        engine=self.engine,
+                        prompt=prompt,
+                        max_tokens=4000 - num_tokens,
+                        temperature=0.7,
+                        top_p=1.0,
+                        frequency_penalty=0.0,
+                        presence_penalty=0.0
+                    )
+
+                    ner_result = response.choices[0].text.strip()
+                    # append des résultats, avec try si jamais
+                    try:
+                        result_dict = ast.literal_eval(ner_result)
+                    except json.JSONDecodeError:
+                        result_dict = {'ORG': [], 'LOC': [], 'PER': [], 'MISC': []} 
+
+                    results.append(result_dict)
+                    retry_after = 1  # reset du delai
+                    break  # exit du while tant que c'est good
+                except RateLimitError:
+                    sleep(retry_after)  # sleep du temps de delai
+                    retry_after *= 2  # double du temps de délai si on essai encore
+
+        return results
 
