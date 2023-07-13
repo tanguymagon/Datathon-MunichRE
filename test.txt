@@ -1,1 +1,1 @@
-https://console.cloud.google.com/compute/instances?referrer=search&project=scrc-amc-bfscr-sbx
+            prompt = f"""When you are 100% sure, do an NER and retrieve the company or business (ORG), the person (PER), the location (LOC) and the miscellaneous (MISC) in a python dictionary , fill the list in double quotes and delete apostrophes, when you are not 100% sure, do not write anything on this text :\n {text}\n"""
