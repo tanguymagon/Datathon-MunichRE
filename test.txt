@@ -1,1 +1,5 @@
-https://portal.azure.com/#@bcloudsbx.onmicrosoft.com/resource/subscriptions/45d3ea32-70f8-4932-b2aa-24b8fb1fe195/resourceGroups/azr-rg-bpceit-bpcesa-d2i2/providers/Microsoft.Storage/storageAccounts/d2i2ml1611820723/keys
+class BlobHelper:
+    def __init__(self, container_name: str = "factiva") -> None:
+        connection_string = "DefaultEndpointsProtocol=https;AccountName=d2i2ml1611820723;AccountKey=hUPUnafIr/Xpbc1iky1IySwXYpoymiPWXGI0DGDkFP1Ds+EJJZX8GHc9dHL57aii9yoFgyUMVUSvWpDOx4ToOg==;EndpointSuffix=core.windows.net"
+        self.blob_service_client = BlobServiceClient.from_connection_string(connection_string)
+        self.container_client = self.blob_service_client.get_container_client(container_name)
