@@ -1,1 +1,1 @@
-            prompt = f"""When you are 100% sure, do an NER and retrieve the company or business (ORG), the person (PER), the location (LOC) and the miscellaneous (MISC) in a python dictionary , fill the list in double quotes and delete apostrophes, when you are not 100% sure, do not write anything on this text :\n {text}\n"""
+https://portal.azure.com/#@bcloudsbx.onmicrosoft.com/resource/subscriptions/45d3ea32-70f8-4932-b2aa-24b8fb1fe195/resourceGroups/azr-rg-bpceit-bpcesa-d2i2/providers/Microsoft.Storage/storageAccounts/d2i2ml1611820723/keys
