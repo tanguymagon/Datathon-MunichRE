@@ -1,553 +1,119 @@
-import json
-import multiprocessing
-import os
-import re
-import time
-import unicodedata
-from functools import partial
-from itertools import chain
-from typing import Dict, List, Tuple, Union
 
-import numpy as np
+# Import necessary modules and libraries
+import pytest
 import pandas as pd
-import torch
-from rapidfuzz import fuzz, process
+from unittest.mock import Mock
+from preprocessing import Preprocessor
 
-from transformers import AutoModelForTokenClassification, AutoTokenizer, TokenClassificationPipeline, pipeline
-import pickle
+# Initialization Test
+import pytest
+from preprocessing import Preprocessor
 
-from ner_data import ACRONYMS, BLACKLISTED_ENTITIES, REGIONS
-from blob import BlobDownloader, BlobUploader
-from sql import read
-
-
-def get_ner_pipeline() -> TokenClassificationPipeline:
-    tokenizer = AutoTokenizer.from_pretrained("xlm-roberta-large-finetuned-conll03-english", use_fast=True)
-    model = AutoModelForTokenClassification.from_pretrained("xlm-roberta-large-finetuned-conll03-english")
-    device = torch.cuda.device_count() - 1 if torch.cuda.is_available() else -1
-    ner_pipeline = pipeline(
-        "ner",
-        model=model,
-        tokenizer=tokenizer,
-        aggregation_strategy="simple",
-        device=device,
-    )
-    return ner_pipeline
-
-
-def clean_phrase(phrase: str) -> str:
-    regex = r"[\n\xa0\x7f\x7f\u2002\u2003\u2005\u2008\u2009\u200a\u200b\u200d\u200e\u2028\u202c\u202f]"
-    return re.sub(regex, " ", phrase)
-
-
-def regroup_entities(entities: list) -> dict:
-    detected_entities = {"ORG": [], "LOC": [], "PER": [], "MISC": []}
-    for phrase_idx, phrase_entities in enumerate(entities):
-        for ent in phrase_entities:
-            if ent["score"] < 0.9 or ent["word"] in BLACKLISTED_ENTITIES:
-                continue
-            detected_entities[ent["entity_group"]].append(
-                [phrase_idx, "".join(ent["word"]), ent["start"], ent["end"], ent["entity_group"]],
-            )
-    return detected_entities
-
-
-def apply_ner_pipeline(df: pd.DataFrame) -> pd.Series:
-    # Allocate the VRAM for the pipeline
-    ner_pipeline = get_ner_pipeline()
-
-    # Explode and clean phrases
-    df_phrases_exploded = df[["an", "Phrases"]].explode("Phrases")
-    df_phrases_exploded["Phrases"] = df_phrases_exploded["Phrases"].apply(clean_phrase)
-
-    # Apply the ner pipeline
-    df_phrases_exploded["entities"] = ner_pipeline(df_phrases_exploded["Phrases"].tolist(), batch_size=64)
-
-    # Clear the GPU memory
-    del ner_pipeline
-    torch.cuda.empty_cache()
-
-    # Regroup the entities by article
-    entities = df_phrases_exploded.groupby(by="an")["entities"].apply(list).apply(regroup_entities)
-    entities = entities.sort_index(key=lambda ans: [df["an"].tolist().index(an) for an in ans])
-    entities = entities.reset_index(drop=True)
-
-    return entities
-
-
-def mapping_region_journal(df: pd.DataFrame) -> pd.DataFrame:
-    map_regions = []
-    for n, i in enumerate(df["source_code"]):
-        sub_map = []
-        for k, v in REGIONS.items():
-            if i in v:
-                sub_map.append(k)
-        if sub_map == []:
-            map_regions.append(["Nationale"])
-        else:
-            map_regions.append(sub_map)
-
-    df["localisation"] = map_regions
-    return df
-
-
-def look_companies(an: str, dict_companies: dict) -> list:
-    if an in dict_companies:
-        return list(set(dict_companies[an]))
-    return []
-
-
-def fuzzy_matching(query: str, choices: List[str]) -> Tuple[str, Union[int, float], int]:
-    return process.extract(query, choices, scorer=fuzz.ratio, limit=1)[0]
-
-
-def geolocalisation_articles(df: pd.DataFrame, NER_in_text: pd.Series) -> Dict[str, str]:
-    df_communes = pd.read_csv(
-        BlobDownloader()("Pipeline/communes_departement_region_v2.csv"), sep="|", encoding="utf-8-sig"
-    )
-    df_communes["nom_commune"] = df_communes["nom_commune"].fillna("")
-    df_communes["nom_departement"] = df_communes["nom_departement"].fillna("")
-    df_communes["nom_region"] = df_communes["nom_region"].fillna("")
-
-    df_communes["nom_commune_standard"] = df_communes["nom_commune"].apply(lambda x: x.lower().replace("-", " "))
-    df_communes["nom_departement_standard"] = df_communes["nom_departement"].apply(
-        lambda x: x.lower().replace("-", " ")
-    )
-    df_communes["nom_region_standard"] = df_communes["nom_region"].apply(lambda x: x.lower().replace("-", " "))
-
-    dict_geolocali = {}
-    final_dict = {}
-
-    for n, i in enumerate(NER_in_text):
-        dict_geolocali[df["an"][n]] = []
-        for j in i["LOC"]:
-            # Part for communes and check if there it s a french commune
-            m_commune = fuzzy_matching(
-                str(j[1]).replace("-", " ").lower(),
-                df_communes["nom_commune_standard"].tolist(),
-            )
-            if m_commune[1] > 90:
-                dict_geolocali[df["an"][n]].append(
-                    {
-                        "region": df_communes["nom_region"][m_commune[2]],
-                        "departement": df_communes["nom_departement"][m_commune[2]],
-                        "commune": df_communes["nom_commune"][m_commune[2]],
-                    }
-                )
-            else:
-                # Part for department, it is not a commune so maybe it is a department
-                m_departement = fuzzy_matching(
-                    str(j[1]).replace("-", " ").lower(),
-                    df_communes["nom_departement_standard"].tolist(),
-                )
-                if m_departement[1] > 90:
-                    dict_geolocali[df["an"][n]].append(
-                        {
-                            "region": df_communes["nom_region"][m_departement[2]],
-                            "departement": df_communes["nom_departement"][m_departement[2]],
-                            "commune": "inconnu",
-                        }
-                    )
-                else:
-                    # Part for Region, it is not a commune or department so maybe it is a Region
-                    m_region = fuzzy_matching(
-                        str(j[1]).replace("-", " ").lower(),
-                        df_communes["nom_region_standard"].tolist(),
-                    )
-                    if m_region[1] > 90:
-                        dict_geolocali[df["an"][n]].append(
-                            {
-                                "region": df_communes["nom_region"][m_region[2]],
-                                "departement": "inconnu",
-                                "commune": "inconnu",
-                            }
-                        )
-                    else:
-                        dict_geolocali[df["an"][n]].append({"region": "Autre", "departement": j[1], "commune": None})
-
-    for s, t in dict_geolocali.items():
-        tmp = {}
-        for item in t:
-            tmp[item["region"]] = {
-                item["departement"]: list(
-                    set(
-                        [
-                            a["commune"]
-                            for a in t
-                            if a["region"] == item["region"] and a["departement"] == item["departement"]
-                        ]
-                    )
-                )
-            }
-
-        produit_final = []
-        for k, v in tmp.items():
-            produit_final.append(
-                {
-                    "region": k,
-                    "departements": [
-                        {"nom_departement": k1, "communes": v1}
-                        if v1 != [None]
-                        else {"nom_departement": k1, "communes": None}
-                        for k1, v1 in v.items()
-                    ],
-                }
-            )
-        if len(produit_final) > 0:
-            final_dict[s] = json.dumps(produit_final, ensure_ascii=False)
-        else:
-            final_dict[s] = None
-
-    return final_dict
-
-
-def remove_accents(input_str: str) -> str:
-    nfkd_form = unicodedata.normalize("NFKD", input_str)
-    return "".join([c for c in nfkd_form if not unicodedata.combining(c)])
-
-
-def remove_exact_matches(string: str, substrings: List[str]) -> str:
-    for substring in substrings:
-        string = string.replace(substring, "")
-    return string
-
-
-def retirer_mots(raison: str, clean_dict_acronym: Dict[str, str]) -> str:
-    if type(raison) == str:
-        raison = remove_accents(raison)
-        list_nom = re.sub(r"[^\w\s]", " ", raison).split(" ")
-        if len(list_nom) > 1:
-            new_RAISON_SOCIALE = " ".join([a for a in list_nom if a.lower() not in clean_dict_acronym.keys()])
-            new_RAISON_SOCIALE = remove_exact_matches(new_RAISON_SOCIALE, clean_dict_acronym.values())
-            if new_RAISON_SOCIALE == "":
-                return " ".join(list_nom).lower()
-            else:
-                if type(new_RAISON_SOCIALE) == str:
-                    return " ".join(re.sub(r"[^\w\s]", " ", new_RAISON_SOCIALE.lower()).split())
-                else:
-                    return ""
-        else:
-            return list_nom[0].lower()
-    else:
-        return ""
-
-
-def strandard_ner(pseudonimo: str, clean_dict_acronym: Dict[str, str]) -> str:
-    if type(pseudonimo) == str:
-        pseudonimo = remove_accents(pseudonimo)
-        pseudonimo = re.sub(r"[^\w\s]", " ", pseudonimo)
-        if pseudonimo != " ":
-            good_companies = []
-            if len(pseudonimo.lower().split(" ")) > 1:
-                for j in pseudonimo.lower().split(" "):
-                    if j not in clean_dict_acronym.keys():
-                        good_companies.append(j)
-                new_pseudonimo = " ".join(good_companies)
-                return remove_exact_matches(new_pseudonimo, clean_dict_acronym.values())
-            else:
-                return pseudonimo.lower()
-        else:
-            return ""
-    else:
-        return ""
-
-
-def strandard_alias(pseudonimo: str, clean_dict_acronym: Dict[str, str]):
-    if type(pseudonimo) == str:
-        pseudonimo = remove_accents(pseudonimo)
-        good_companies = []
-        for i in list(set(pseudonimo.split("|"))):
-            good_words = []
-            if len(i.lower().split(" ")) > 1:
-                for j in i.lower().split(" "):
-                    if j not in clean_dict_acronym.keys() and j != " " and j != "":
-                        good_words.append(re.sub(r"[^\w\s]", " ", j))
-                good_companies.append(remove_exact_matches(" ".join(good_words), clean_dict_acronym.values()))
-            else:
-                good_companies.append(
-                    remove_exact_matches(re.sub(r"[^\w\s]", " ", i.lower()), clean_dict_acronym.values())
-                )
-        return list(set(good_companies))
-    else:
-        return ""
-
-
-def transform_string_siren(siren_number) -> str:
-    siren_number = str(siren_number)
-
-    if len(siren_number) != 9:
-        n = 9 - len(siren_number)
-        zeros = "0" * n
-        siren_number = zeros + siren_number
-    return siren_number
-
-
-def load_data() -> Tuple[pd.DataFrame, pd.DataFrame, dict, dict, dict]:
-    blob = BlobDownloader()
-    os.makedirs("data", exist_ok=True)
+def test_initialization():
+    preprocessor = Preprocessor()
     
-    # Load expositions
-    df_expo = pd.read_excel(
-        blob(
-            "Pipeline/Export_Suricate_Suivi_Disponible_QT_05062023_GBPCE.xlsx",
-            "data/Export_Suricate_Suivi_Disponible_QT_05062023_GBPCE.xlsx",
-        ),
-        sheet_name=0,
-        engine="openpyxl",
-    )
-    df_expo = df_expo.sort_values(by="Exposition", ascending=False)
-    df_expo = df_expo[df_expo["SIREN"].isna() == False]
-    df_expo = df_expo[df_expo["SIREN"] != "20SC22872"]
-    df_expo["SIREN"] = df_expo["SIREN"].apply(lambda x: int(x))
-    df_expo = df_expo.drop_duplicates(subset="SIREN", keep="first").reset_index(drop=True)
+    # Check if stopwords are initialized correctly
+    assert preprocessor.stopwords == ["de", "la", "le", "les", "du", "des"], "Stopwords not initialized correctly"
     
-    historic_ID_federal_found = {}
-    historic_siren_found_text = {}
-    old_ans_NER = pd.read_pickle(blob("Pipeline/historic_NER_scores.pickle", "data/historic_NER_scores.pickle"))
-    
-    # Load contreparties_france
-    df_contreparties = read("SELECT * FROM contreparties_france")
-    df_contreparties.to_parquet("data/contreparties_france.pq")
-    
-    return df_contreparties, df_expo, historic_ID_federal_found, historic_siren_found_text, old_ans_NER
+    # Add more checks for other properties if necessary
 
+# Mock Test for load_acronyms method
+import pytest
+import pandas as pd
+from preprocessing import Preprocessor
+from unittest.mock import Mock
 
-def build_libelle_groupe_final(company: pd.Series) -> str:
-    if (type(company["LIBELLE_GROUPE"]) == "" and type(company["LIBELLE_GROUPE_nat"]) != ""):
-        return company["LIBELLE_GROUPE_nat"]
-    else:
-        return company["LIBELLE_GROUPE"]
-
-
-def clean_dataframe(
-    df_contreparties: pd.DataFrame, df_expo: pd.DataFrame, acronyms: Dict[str, str]
-) -> pd.DataFrame:
-    siren_expo = dict(zip(df_expo["SIREN"].tolist(), df_expo["Exposition"].tolist()))
-    df_contreparties["LIBELLE_GROUPE_final"] = df_contreparties.apply(build_libelle_groupe_final, axis=1)
-    df_contreparties["Exposition"] = df_contreparties["SIREN"].apply(lambda x: siren_expo[x] if x in siren_expo.keys() else 0)
-    df_contreparties["Descriptor_v2"] = df_contreparties["RAISON_SOCIALE"].apply(lambda x: retirer_mots(x, acronyms))
-    df_contreparties = df_contreparties.sort_values(by=["Exposition", "ID_FEDERAL"], ascending=False)
-    df_contreparties = df_contreparties.drop_duplicates(subset="Descriptor_v2", keep="first").reset_index(drop=True)
-    df_contreparties["LIBELLE_GROUPE_final_v2"] = df_contreparties["LIBELLE_GROUPE_final"].apply(lambda x: retirer_mots(x, acronyms))
-    df_contreparties["TIERS_PERE_ULTIME"] = df_contreparties["TIERS_PERE_ULTIME"].replace("", 0).apply(float).apply(int)
-    df_contreparties["TIERS_PERE"] = df_contreparties["TIERS_PERE"].replace("", 0).apply(float).apply(int)
-    df_contreparties["ID_FEDERAL_groupe"] = df_contreparties.apply(
-        lambda x: x["TIERS_PERE_ULTIME"]
-        if x["TIERS_PERE_ULTIME"] != 0
-        else x["TIERS_PERE"]
-        if x["TIERS_PERE"] != 0
-        else x["ID_FEDERAL"],
-        axis=1,
-    )
-    # df_contreparties = df_contreparties.drop_duplicates(subset=["RAISON_SOCIALE", "ID_FEDERAL"]).reset_index(drop=True)
-    df_contreparties = df_contreparties[["ID_FEDERAL", "ID_FEDERAL_groupe", "LIBELLE_GROUPE_final_v2", "Descriptor_v2", "SIREN", "ALIAS"]]
-    df_contreparties = df_contreparties.reset_index(drop=True)
-    return df_contreparties
-
-
-def build_df_phrases(df: pd.DataFrame, NER_in_text: pd.Series) -> pd.DataFrame:
-    data = {}
-    data["an"] = []
-    data["entite"] = []
-    data["Phrase"] = []
-    data["score_sentiment"] = []
-    data["type_entite"] = []
-    data["position_phrase"] = []
-    for article_idx, article_entities in enumerate(NER_in_text):
-        for ent_acronym, ent_type in [("ORG", "company"), ("PER", "person"), ("LOC", "location"), ("MISC", "event")]:
-            for ent in article_entities[ent_acronym]:
-                data["an"].append(df["an"][article_idx])
-                data["entite"].append(ent[1])
-                data["Phrase"].append(df["Phrases"][article_idx][ent[0]])
-                data["score_sentiment"].append(df["score_sentiment_phrase"][article_idx][ent[0]])
-                data["type_entite"].append(ent_type)
-                data["position_phrase"].append(ent[0])
-    df_phrases = pd.DataFrame(data=data)
-    return df_phrases
-
-
-def clean_aliases(df_contreparties: pd.DataFrame, acronyms: Dict[str, str]) -> Dict[str, tuple]:
-    # (id_federal, siren) -> liste alias
-    ids_to_aliases = dict(
-        zip(
-            zip(df_contreparties["ID_FEDERAL"], df_contreparties["SIREN"]),
-            [strandard_alias(a, acronyms) for a in df_contreparties["ALIAS"]],
-        )
-    )
-    # TODO: are standardized aliases really unique ?
-    # alias -> (id_federal, siren)
-    alias_to_ids = {
-        alias: ids for ids, aliases in ids_to_aliases.items() for alias in aliases
+@pytest.fixture
+def mock_blob_downloader(mocker):
+    # Mocking the BlobDownloader to return a sample dataframe
+    sample_data = {
+        "Abbreviations Local language": ["abbr1;abbr2", "abbr3"],
+        "Entity Legal Form name Local name": ["entity1", "entity2"],
+        "Language": ["French", "French"]
     }
-    return alias_to_ids
+    df = pd.DataFrame(sample_data)
+    mocker.patch('preprocessing.BlobDownloader', return_value=Mock(__call__=Mock(return_value=df)))
+    
+def test_load_acronyms(mock_blob_downloader):
+    preprocessor = Preprocessor()
+    preprocessor.load_acronyms()
+    
+    # Check if acronyms are loaded and processed correctly
+    expected_acronyms = {
+        "abbr1": "entity1",
+        "abbr2": "entity1",
+        "abbr3": "entity2",
+    }
+    
+    for key, value in expected_acronyms.items():
+        assert preprocessor.acronyms[key] == value, f"Expected {key} to map to {value} but got {preprocessor.acronyms[key]}"
 
+# Tests for remove_accents and remove_special_characters methods
+import pytest
+from preprocessing import Preprocessor
 
-def match_entity(
-    entity_clean: str,
-    df_contreparties: pd.DataFrame,
-    alias_to_ids: Dict[str, tuple],
-) -> Tuple[int, int, str, str]:
-    if not entity_clean:
-        return 0, 0, "N/A", "N/A"
+def test_remove_accents():
+    preprocessor = Preprocessor()
+    
+    input_str = "éàûö"
+    expected_output = "eauo"
+    
+    assert preprocessor.remove_accents(input_str) == expected_output, f"Expected {expected_output} but got {preprocessor.remove_accents(input_str)}"
 
-    m_rs = fuzzy_matching(entity_clean, df_contreparties["Descriptor_v2"].tolist())
-    if m_rs[1] >= 96:
-        return df_contreparties["ID_FEDERAL"][m_rs[2]], int(df_contreparties["SIREN"][m_rs[2]]), "RAISON SOCIALE", m_rs[0]
+def test_remove_special_characters():
+    preprocessor = Preprocessor()
+    
+    input_str = "Hello!@# World$%^"
+    expected_output = "Hello World"
+    
+    assert preprocessor.remove_special_characters(input_str) == expected_output, f"Expected {expected_output} but got {preprocessor.remove_special_characters(input_str)}"
 
-    m_groupe = fuzzy_matching(entity_clean, df_contreparties["LIBELLE_GROUPE_final_v2"].tolist())
-    if m_groupe[1] >= 96:
-        return df_contreparties["ID_FEDERAL_groupe"][m_groupe[2]], int(df_contreparties["SIREN"][m_groupe[2]]), "LIBELLE GROUPE", m_groupe[0]
+# Tests for remove_stopwords, expand_acronyms, and lowercase methods
+import pytest
+from preprocessing import Preprocessor
 
-    m_alias = fuzzy_matching(entity_clean, alias_to_ids.keys())
-    if m_alias[1] >= 96:
-        return alias_to_ids[m_alias[0]][0], int(alias_to_ids[m_alias[0]][1]), "ALIAS", m_alias[0]
+def test_remove_stopwords():
+    preprocessor = Preprocessor()
+    
+    input_str = "de la hello world du"
+    expected_output = "hello world"
+    
+    assert preprocessor.remove_stopwords(input_str) == expected_output, f"Expected {expected_output} but got {preprocessor.remove_stopwords(input_str)}"
 
-    return 0, 0, "N/A", "N/A"
+def test_expand_acronyms():
+    preprocessor = Preprocessor()
+    preprocessor.acronyms = {"INC": "incorporated", "LLC": "Limited liability company"}
+    
+    input_str = "INC is similar to LLC"
+    expected_output = "incorporated is similar to Limited liability company"
+    
+    assert preprocessor.expand_acronyms(input_str) == expected_output, f"Expected {expected_output} but got {preprocessor.expand_acronyms(input_str)}"
 
+def test_lowercase():
+    preprocessor = Preprocessor()
+    
+    input_str = "HELLO World"
+    expected_output = "hello world"
+    
+    assert preprocessor.lowercase(input_str) == expected_output, f"Expected {expected_output} but got {preprocessor.lowercase(input_str)}"
 
-def match_entities(
-    entities: List[str],
-    df_contreparties: pd.DataFrame,
-    alias_to_ids: Dict[str, tuple],
-):
-    matches = []
-    for entity in entities:
-        matches.append(
-            match_entity(
-                entity,
-                df_contreparties=df_contreparties,
-                alias_to_ids=alias_to_ids,
-            )
-        )
-    return matches
+# Tests for preprocess and remove_blacklist_and_locations methods
+import pytest
+from preprocessing import Preprocessor
 
+def test_preprocess():
+    preprocessor = Preprocessor()
+    preprocessor.acronyms = {"INC": "incorporated"}
+    
+    input_str = "de HELLO INC!@# World du"
+    expected_output = "hello incorporated world"
+    
+    assert preprocessor.preprocess(input_str) == expected_output, f"Expected {expected_output} but got {preprocessor.preprocess(input_str)}"
 
-def map_federal_id_siren(
-    entities: List[str],
-    acronyms: Dict[str, str],
-    df_contreparties: pd.DataFrame,
-    historic_ID_federal_found: dict,
-    historic_siren_found_text: dict,
-    alias_to_ids: Dict[str, tuple],
-):
-    standard_entities = []
-    for entity in entities:
-        standard_entities.append(strandard_ner(entity, acronyms))
-    ids_contreparties = dict(zip(entities, standard_entities))
-
-    ID_federal_found_text_french = {}
-    siren_found_text_french = {}
-    match_steps = {}
-    matched_entites = {}
-    NER_not_in_historic = []
-
-    entities_to_match = []
-    known_entities = set(historic_ID_federal_found.keys())
-    for entity, entity_clean in ids_contreparties.items():
-        if entity in known_entities:
-            ID_federal_found_text_french[entity] = historic_ID_federal_found[entity]
-            siren_found_text_french[entity] = historic_siren_found_text[entity]
-        else:
-            NER_not_in_historic.append(entity)
-            entities_to_match.append(entity_clean)
-
-    if len(entities_to_match) > 0:
-        print(f"new entities to match: {len(entities_to_match)} out of {len(ids_contreparties)}")
-        match_func = partial(
-            match_entities,
-            df_contreparties=df_contreparties,
-            alias_to_ids=alias_to_ids,
-        )
-        num_workers = multiprocessing.cpu_count()
-        entities_chunks = np.array_split(entities_to_match, min(num_workers, len(entities_to_match)))
-        with multiprocessing.Pool() as pool:
-            chunks_results = pool.map(match_func, entities_chunks)
-        federal_ids, sirens, steps, entities = list(zip(*chain.from_iterable(chunks_results)))
-
-        ID_federal_found_text_french.update(dict(zip(NER_not_in_historic, federal_ids)))
-        siren_found_text_french.update(dict(zip(NER_not_in_historic, sirens)))
-        match_steps.update(dict(zip(NER_not_in_historic, steps)))
-        matched_entites.update(dict(zip(NER_not_in_historic, entities)))
-
-    return ID_federal_found_text_french, siren_found_text_french, match_steps, matched_entites, NER_not_in_historic
-
-
-def upload_data(ner_history: dict, federal_id_map_history: dict, siren_map_history: dict):
-    uploader = BlobUploader()
-    uploader.upload_pickle(ner_history, blob_name="Pipeline/dev_testhistoric_NER_scores.pickle")
-    uploader.upload_pickle(
-        federal_id_map_history,
-        blob_name="Pipeline/dev_testdicts_ID_FEDERAL_table_phrases_all_no_accents_updated.pickle",
-    )
-    uploader.upload_pickle(
-        siren_map_history, blob_name="Pipeline/dev_testdicts_SIREN_table_phrases_all_no_accents_updated.pickle"
-    )
-
-
-def entity_recognition(df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame]:
-    # Clean acronyms
-    ACRONYMS_CLEAN = {k.lower(): remove_accents(v).lower() for k, v in ACRONYMS.items()}
-
-    # Load the data
-    print("loading data...")
-    df_contreparties, df_expo, historic_ID_federal_found, historic_siren_found_text, old_ans_NER = load_data()
-
-    # Clean the dataframes
-    print("cleaning contreparties_france...")
-    df_contreparties = clean_dataframe(df_contreparties, df_expo, ACRONYMS_CLEAN)
-    del df_expo
-    df_contreparties.to_parquet("data/df_contreparties.pq")
-
-    # Build the `phrases` dataframe
-    df_phrases = df.copy()
-
-    # Clean the aliases
-    print("cleaning the aliases...")
-    alias_to_ids = clean_aliases(
-        df_contreparties,
-        ACRONYMS_CLEAN,
-    )
-    df_contreparties.drop(columns="ALIAS", inplace=True)
-    with open("data/alias_to_ids.pickle", "wb") as fp:
-        pickle.dump(alias_to_ids, fp)
-
-    # Map federal ids and siren numbers to each entity of type `company`
-    entities = df_phrases["entite"][df_phrases["type_entite"] == "company"].unique().tolist()
-    start = time.time()
-    ID_federal_found_text_french, siren_found_text_french, match_steps, matched_entites, NER_not_in_historic = map_federal_id_siren(
-        entities,
-        ACRONYMS_CLEAN,
-        df_contreparties,
-        historic_ID_federal_found,
-        historic_siren_found_text,
-        alias_to_ids,
-    )
-    print("time taken to match the entities:", time.time() - start)
-
-    for entity in NER_not_in_historic:
-        historic_ID_federal_found[entity] = ID_federal_found_text_french[entity]
-        historic_siren_found_text[entity] = siren_found_text_french[entity]
-
-    # Reupload updated data to the blob container
-    # upload_data(old_ans_NER, historic_ID_federal_found, historic_siren_found_text)
-
-    # Write matched federal ids and SIREN to df_phrases
-    # df_phrases["id_federal"] = df_phrases["entite"].apply(lambda ent: ID_federal_found_text_french.get(ent, 0))
-    df_phrases["id_federal"] = df_phrases["entite"].map(ID_federal_found_text_french).fillna(0)
-    # df_phrases["siren_contrepartie"] = df_phrases["entite"].apply(lambda ent: siren_found_text_french.get(ent, 0))
-    df_phrases["siren_contrepartie"] = df_phrases["entite"].map(siren_found_text_french).fillna(0)
-    df_phrases["etape_matching"] = df_phrases["entite"].map(match_steps).fillna("N/A")
-    df_phrases["entite_matchee"] = df_phrases["entite"].map(matched_entites).fillna("N/A")
-
-    df_phrases["id_federal"] = df_phrases["id_federal"].astype(int)
-    df_phrases["siren_contrepartie"] = df_phrases["siren_contrepartie"].astype(int)
-    df_phrases["siren_contrepartie"] = df_phrases["siren_contrepartie"].apply(lambda x: transform_string_siren(x))
-
-    # Write the list of companies in the column `liste_contrepartie` of df
-    sub_df = df_phrases[df_phrases["type_entite"] == "company"]
-    dict_companies = sub_df.groupby(["an"])["entite"].apply(list).to_dict()
-    df["liste_contreparties"] = df["an"].apply(lambda x: look_companies(x, dict_companies))
-    df["liste_contreparties"] = df["liste_contreparties"].apply(lambda x: [a.upper() for a in x])
-    # df["NER"] = NER_in_text
-
-    return df, df_phrases
+def test_remove_blacklist_and_locations():
+    preprocessor = Preprocessor()
+    
+    input_str = "hello Paris New York"
+    expected_output = "hello"
+    
+    assert preprocessor.remove_blacklist_and_locations(input_str) == expected_output, f"Expected {expected_output} but got {preprocessor.remove_blacklist_and_locations(input_str)}"
