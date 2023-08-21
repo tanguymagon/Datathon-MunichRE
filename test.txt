@@ -1,119 +1,29 @@
-
-# Import necessary modules and libraries
-import pytest
 import pandas as pd
-from unittest.mock import Mock
-from preprocessing import Preprocessor
+import numpy as np
 
-# Initialization Test
-import pytest
-from preprocessing import Preprocessor
+array1 = np.array([1, 2, 3])
+array2 = np.array([4, 5])
+array3 = np.array([6, 7, 8, 9])
 
-def test_initialization():
-    preprocessor = Preprocessor()
-    
-    # Check if stopwords are initialized correctly
-    assert preprocessor.stopwords == ["de", "la", "le", "les", "du", "des"], "Stopwords not initialized correctly"
-    
-    # Add more checks for other properties if necessary
+# Find the longest array
+max_length = max(len(array1), len(array2), len(array3))
 
-# Mock Test for load_acronyms method
-import pytest
-import pandas as pd
-from preprocessing import Preprocessor
-from unittest.mock import Mock
+# Pad shorter arrays with NaN
+array1 = np.pad(array1, (0, max_length - len(array1)), 'constant', constant_values=np.nan)
+array2 = np.pad(array2, (0, max_length - len(array2)), 'constant', constant_values=np.nan)
+array3 = np.pad(array3, (0, max_length - len(array3)), 'constant', constant_values=np.nan)
 
-@pytest.fixture
-def mock_blob_downloader(mocker):
-    # Mocking the BlobDownloader to return a sample dataframe
-    sample_data = {
-        "Abbreviations Local language": ["abbr1;abbr2", "abbr3"],
-        "Entity Legal Form name Local name": ["entity1", "entity2"],
-        "Language": ["French", "French"]
-    }
-    df = pd.DataFrame(sample_data)
-    mocker.patch('preprocessing.BlobDownloader', return_value=Mock(__call__=Mock(return_value=df)))
-    
-def test_load_acronyms(mock_blob_downloader):
-    preprocessor = Preprocessor()
-    preprocessor.load_acronyms()
-    
-    # Check if acronyms are loaded and processed correctly
-    expected_acronyms = {
-        "abbr1": "entity1",
-        "abbr2": "entity1",
-        "abbr3": "entity2",
-    }
-    
-    for key, value in expected_acronyms.items():
-        assert preprocessor.acronyms[key] == value, f"Expected {key} to map to {value} but got {preprocessor.acronyms[key]}"
+# Create DataFrame
+df = pd.DataFrame({
+    'Column1': array1,
+    'Column2': array2,
+    'Column3': array3
+})
 
-# Tests for remove_accents and remove_special_characters methods
-import pytest
-from preprocessing import Preprocessor
+print(df)
+Would you like to proceed with a demonstration of either approach?
 
-def test_remove_accents():
-    preprocessor = Preprocessor()
-    
-    input_str = "éàûö"
-    expected_output = "eauo"
-    
-    assert preprocessor.remove_accents(input_str) == expected_output, f"Expected {expected_output} but got {preprocessor.remove_accents(input_str)}"
 
-def test_remove_special_characters():
-    preprocessor = Preprocessor()
-    
-    input_str = "Hello!@# World$%^"
-    expected_output = "Hello World"
-    
-    assert preprocessor.remove_special_characters(input_str) == expected_output, f"Expected {expected_output} but got {preprocessor.remove_special_characters(input_str)}"
 
-# Tests for remove_stopwords, expand_acronyms, and lowercase methods
-import pytest
-from preprocessing import Preprocessor
 
-def test_remove_stopwords():
-    preprocessor = Preprocessor()
-    
-    input_str = "de la hello world du"
-    expected_output = "hello world"
-    
-    assert preprocessor.remove_stopwords(input_str) == expected_output, f"Expected {expected_output} but got {preprocessor.remove_stopwords(input_str)}"
 
-def test_expand_acronyms():
-    preprocessor = Preprocessor()
-    preprocessor.acronyms = {"INC": "incorporated", "LLC": "Limited liability company"}
-    
-    input_str = "INC is similar to LLC"
-    expected_output = "incorporated is similar to Limited liability company"
-    
-    assert preprocessor.expand_acronyms(input_str) == expected_output, f"Expected {expected_output} but got {preprocessor.expand_acronyms(input_str)}"
-
-def test_lowercase():
-    preprocessor = Preprocessor()
-    
-    input_str = "HELLO World"
-    expected_output = "hello world"
-    
-    assert preprocessor.lowercase(input_str) == expected_output, f"Expected {expected_output} but got {preprocessor.lowercase(input_str)}"
-
-# Tests for preprocess and remove_blacklist_and_locations methods
-import pytest
-from preprocessing import Preprocessor
-
-def test_preprocess():
-    preprocessor = Preprocessor()
-    preprocessor.acronyms = {"INC": "incorporated"}
-    
-    input_str = "de HELLO INC!@# World du"
-    expected_output = "hello incorporated world"
-    
-    assert preprocessor.preprocess(input_str) == expected_output, f"Expected {expected_output} but got {preprocessor.preprocess(input_str)}"
-
-def test_remove_blacklist_and_locations():
-    preprocessor = Preprocessor()
-    
-    input_str = "hello Paris New York"
-    expected_output = "hello"
-    
-    assert preprocessor.remove_blacklist_and_locations(input_str) == expected_output, f"Expected {expected_output} but got {preprocessor.remove_blacklist_and_locations(input_str)}"
