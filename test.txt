@@ -1,29 +1,36 @@
-import pandas as pd
-import numpy as np
-
-array1 = np.array([1, 2, 3])
-array2 = np.array([4, 5])
-array3 = np.array([6, 7, 8, 9])
-
-# Find the longest array
-max_length = max(len(array1), len(array2), len(array3))
-
-# Pad shorter arrays with NaN
-array1 = np.pad(array1, (0, max_length - len(array1)), 'constant', constant_values=np.nan)
-array2 = np.pad(array2, (0, max_length - len(array2)), 'constant', constant_values=np.nan)
-array3 = np.pad(array3, (0, max_length - len(array3)), 'constant', constant_values=np.nan)
-
-# Create DataFrame
-df = pd.DataFrame({
-    'Column1': array1,
-    'Column2': array2,
-    'Column3': array3
-})
-
-print(df)
-Would you like to proceed with a demonstration of either approach?
-
-
+preproc_func1
+(3379543, 34)
+736777
+preproc_func2
+(3379560, 34)
+736782
+preproc_func3
+(3404872, 34)
+736487
+preproc_func4
+(3560694, 34)
+759854
+preproc_func5
+(3560694, 34)
+759854
+preproc_func6
+(3608563, 34)
+758419
+preproc_func7
+(3609273, 34)
+758547
+preproc_func8
+(3613398, 34)
+758930
+preproc_func9
+(3614187, 34)
+758749
+preproc_func10
+(4260392, 34)
+792209
+preproc_func11
+(4331228, 34)
+799454
 
 
 
