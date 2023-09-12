@@ -1,83 +1,19 @@
-I would like to take this opportunity to ask you some questions about the data, more specifically concerning the source_names and the duplicated/similar articles from those sources, so I’ll list my questions below, if you don’t understand them ore need more clarification, please let me know.
+I would like to take this opportunity to ask you some questions about the data, particularly concerning the source_names and the duplicated or similar articles from those sources. I have listed my questions below. If you need further clarification or don't understand them, please let me know.
 
- 
+We have noticed that we extract approximately 330,000 articles per year. Out of these, we only use around 225,000 because we find many duplicates. In other words, these articles have either identical or very similar content. At the same time, these articles have different 'AN' codes, so according to your definition, they are separate articles. My first question is: Do you have an algorithm or model in place that helps identify similar articles, or at least a way to filter these out during extraction?
 
-We have noticed that annually we extract around 330000 articles per year, of which we finally use only around 225000 because we find many articles that are duplicates, that is to say that they have exactly the same content or one very similar, at the same time these articles have different 'an' so according to your definition they are different articles, so I think my first question is, don't you have some algorithm or model that helps to identify similar articles or at least that allow us to filter on these at the moment of extraction?
-We have also remarked that when creating an 'an' the principle is not the same for all the sources, I think you will understand more quickly with this example, The ‘an’ of the  'source_name' “Les Echos” has different ways to start like ECHOS0, ECHOFR, CAPFIN, CAPFIF, ECHWE0, LECERC, ECHOBF and echos0, whereas “Les Echos.fr” has only one way of starting which is  ECHOFR, so we would like to know how do you associate the 'an' to the source_name or how do you create an ‘an’?
-As you could see from my previous questions we filtered the articles we found as duplicates, while we were doing this analysis, we found that for the same source like for exemple ‘La Tribune’, the same article has a different format based on the source_name, so we would like to know why? Example
+We have also observed that the principle for creating an 'AN' is not consistent across all sources. To illustrate, the 'AN' of the source_name "Les Echos" can start in various ways such as ECHOS0, ECHOFR, CAPFIN, CAPFIF, ECHWE0, LECERC, ECHOBF, and echos0. However, "Les Echos.fr" only starts with ECHOFR. How do you associate the 'AN' with the source_name or what is the process for creating an 'AN'?
 
- 
+From our analysis, we found that the same article can have different formats based on the source_name. For example, for the source ‘La Tribune’, the same article appears differently:
 
-Source_name_original
+Source_name_original: La Tribune.fr
+An_original: TBNWEB0020230905ej9400036
 
-	
+Source_name_duplicated: La Tribune
+An_duplicated: TRDS000020230905ej960000n
 
-An_original
+Why is this the case?
 
-	
+In previous discussions, you explained that a source with ".fr" in the name indicates an electronic version, while the absence of ".fr" indicates a paper version. We suspect that the format changes due to the OCR or whatever algorithm you use to digitize the paper version, making it less readable. Is our assumption correct?
 
-Source_name_duplicated
-
-	
-
-an_duplicated
-
-
-
-
-La Tribune.fr
-
- 
-
-	
-
-TBNWEB0020230905ej9400036
-
- 
-
-	
-
-La Tribune
-
- 
-
-	
-
-TRDS000020230905ej960000n
-
- 
-
-
-
-
-La Tribune.fr
-
- 
-
-	
-
-TBNWEB0020230906ej950003r
-
- 
-
-	
-
-La Tribune
-
- 
-
-	
-
-TRDS000020230907ej970000v
-
- 
-
- 
-
- 
-
-From previous discussions, you explained to us that when the source has .fr in the name it means that it is a source that comes from the electronic version of the newspaper, while when it doesn't it comes from the paper version, so we have the theory that by applying the OCR or whatever algorithm you use to digitize the paper version the format changes and becomes less readable, are we right?
-
- 
-
-4. We would also like to know if you have a way of identifying what is the best/first version of an article (imagining that you are able to identify similar articles), meaning if it is an article that originally came in the electronic version and then it was printed in the paper version or if it was the opposite? As we found that around 95% of our duplicates come within the same source.
+Lastly, do you have a method for identifying the best or original version of an article? We ask this because around 95% of our duplicates come from the same source. For example, is there a way to determine whether an article originated in the electronic version and was then printed, or vice versa?
