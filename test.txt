@@ -1,19 +1,8 @@
-I would like to take this opportunity to ask you some questions about the data, particularly concerning the source_names and the duplicated or similar articles from those sources. I have listed my questions below. If you need further clarification or don't understand them, please let me know.
-
-We have noticed that we extract approximately 330,000 articles per year. Out of these, we only use around 225,000 because we find many duplicates. In other words, these articles have either identical or very similar content. At the same time, these articles have different 'AN' codes, so according to your definition, they are separate articles. My first question is: Do you have an algorithm or model in place that helps identify similar articles, or at least a way to filter these out during extraction?
-
-We have also observed that the principle for creating an 'AN' is not consistent across all sources. To illustrate, the 'AN' of the source_name "Les Echos" can start in various ways such as ECHOS0, ECHOFR, CAPFIN, CAPFIF, ECHWE0, LECERC, ECHOBF, and echos0. However, "Les Echos.fr" only starts with ECHOFR. How do you associate the 'AN' with the source_name or what is the process for creating an 'AN'?
-
-From our analysis, we found that the same article can have different formats based on the source_name. For example, for the source ‘La Tribune’, the same article appears differently:
-
-Source_name_original: La Tribune.fr
-An_original: TBNWEB0020230905ej9400036
-
-Source_name_duplicated: La Tribune
-An_duplicated: TRDS000020230905ej960000n
-
-Why is this the case?
-
-In previous discussions, you explained that a source with ".fr" in the name indicates an electronic version, while the absence of ".fr" indicates a paper version. We suspect that the format changes due to the OCR or whatever algorithm you use to digitize the paper version, making it less readable. Is our assumption correct?
-
-Lastly, do you have a method for identifying the best or original version of an article? We ask this because around 95% of our duplicates come from the same source. For example, is there a way to determine whether an article originated in the electronic version and was then printed, or vice versa?
+        self.df_companies["CHIFFRE_AFFAIRES"] = self.df_companies.apply(
+            lambda x: x["CHIFFRE_AFFAIRES_c"] if x["CHIFFRE_AFFAIRES_c"] > 0 else x["CHIFFRE_AFFAIRES"],
+            axis=1,
+        )
+        self.df_companies["EXPOSITION"].fillna(0, inplace=True)
+        self.df_companies["LG"] = self.df_companies.apply(
+            lambda x: x["LIBELLE_GROUPE_nat"] if x["LIBELLE_GROUPE_nat"] else x["LIBELLE_GROUPE"],
+            axis=1,
