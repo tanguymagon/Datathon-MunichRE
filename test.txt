@@ -1,13 +1,5 @@
-# Optimisation de la colonne CHIFFRE_AFFAIRES
+import numpy as np
+
 mask = self.df_companies["CHIFFRE_AFFAIRES_c"] > 0
-self.df_companies.loc[mask, "CHIFFRE_AFFAIRES"] = self.df_companies.loc[mask, "CHIFFRE_AFFAIRES_c"]
+self.df_companies["CHIFFRE_AFFAIRES"] = np.where(mask, self.df_companies["CHIFFRE_AFFAIRES_c"], self.df_companies["CHIFFRE_AFFAIRES"])
 
-# Remplacement des valeurs NaN par 0 pour la colonne EXPOSITION
-self.df_companies["EXPOSITION"].fillna(0, inplace=True)
-
-# Optimisation de la colonne LG
-self.df_companies["LG"] = np.where(
-    self.df_companies["LIBELLE_GROUPE_nat"].notna(), 
-    self.df_companies["LIBELLE_GROUPE_nat"], 
-    self.df_companies["LIBELLE_GROUPE"]
-)
