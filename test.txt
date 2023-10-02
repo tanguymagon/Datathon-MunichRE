@@ -1,5 +1,6 @@
-        self.df_companies["LG"] = self.df_companies.apply(
-            lambda x: x["LIBELLE_GROUPE_nat"] if x["LIBELLE_GROUPE_nat"] else x["LIBELLE_GROUPE"],
-            axis=1,
-        )
+import numpy as np
+
+mask = self.df_companies["LIBELLE_GROUPE_nat"].astype(bool)
+self.df_companies["LG"] = np.where(mask, self.df_companies["LIBELLE_GROUPE_nat"], self.df_companies["LIBELLE_GROUPE"])
+
 
