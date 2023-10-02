@@ -1,8 +1,13 @@
-        self.df_companies["CHIFFRE_AFFAIRES"] = self.df_companies.apply(
-            lambda x: x["CHIFFRE_AFFAIRES_c"] if x["CHIFFRE_AFFAIRES_c"] > 0 else x["CHIFFRE_AFFAIRES"],
-            axis=1,
-        )
-        self.df_companies["EXPOSITION"].fillna(0, inplace=True)
-        self.df_companies["LG"] = self.df_companies.apply(
-            lambda x: x["LIBELLE_GROUPE_nat"] if x["LIBELLE_GROUPE_nat"] else x["LIBELLE_GROUPE"],
-            axis=1,
+# Optimisation de la colonne CHIFFRE_AFFAIRES
+mask = self.df_companies["CHIFFRE_AFFAIRES_c"] > 0
+self.df_companies.loc[mask, "CHIFFRE_AFFAIRES"] = self.df_companies.loc[mask, "CHIFFRE_AFFAIRES_c"]
+
+# Remplacement des valeurs NaN par 0 pour la colonne EXPOSITION
+self.df_companies["EXPOSITION"].fillna(0, inplace=True)
+
+# Optimisation de la colonne LG
+self.df_companies["LG"] = np.where(
+    self.df_companies["LIBELLE_GROUPE_nat"].notna(), 
+    self.df_companies["LIBELLE_GROUPE_nat"], 
+    self.df_companies["LIBELLE_GROUPE"]
+)
