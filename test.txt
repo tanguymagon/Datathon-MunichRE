@@ -1,6 +1,38 @@
-import numpy as np
+import requests
+from bs4 import BeautifulSoup
 
-mask = self.df_companies["LIBELLE_GROUPE_nat"].astype(bool)
-self.df_companies["LG"] = np.where(mask, self.df_companies["LIBELLE_GROUPE_nat"], self.df_companies["LIBELLE_GROUPE"])
+# Votre liste de numéros SIREN
+siren_list = ['SIREN1', 'SIREN2', 'SIREN3', ...]
+
+# Dictionnaire pour stocker les résultats
+results = {}
+
+for siren in siren_list:
+    # Construisez l'URL en utilisant le numéro SIREN (ajustez selon le format de l'URL du site)
+    url = f'https://www.pappers.fr/entreprise?{siren}'
+
+    # Envoyez une requête HTTP à l'URL
+    response = requests.get(url)
+    
+    # Vérifiez que la requête a été couronnée de succès (code HTTP 200)
+    if response.status_code == 200:
+        # Parsez la page HTML avec Beautiful Soup
+        soup = BeautifulSoup(response.text, 'html.parser')
+        
+        # Trouvez l'élément contenant le chiffre d'affaires (ajustez selon la structure HTML du site)
+        # Par exemple: 
+        # ca_element = soup.find('span', {'class': 'chiffre-affaires'})
+        
+        # Extract the text content (adjust as per the actual structure)
+        # ca = ca_element.get_text()
+        
+        # Stockez le résultat dans le dictionnaire
+        # results[siren] = ca
+        pass
+    else:
+        print(f"Failed to retrieve data for SIREN: {siren}")
+
+# À ce stade, `results` devrait contenir les chiffres d'affaires pour chaque SIREN
+
 
 
