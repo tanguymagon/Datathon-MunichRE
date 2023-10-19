@@ -1,40 +1,78 @@
-Objet : Ateliers de maturation pour les prochains sprints : Système d'alerte, Page Secteur & Page contreparties
+def __call__(self, company: str, remove_acronyms: bool, remove_locations: bool) -> str:
+    if not isinstance(company, str):
+        raise TypeError(f"company must be a string and not {type(company)}")
+    
+    # Initialize step_preprocessing list
+    step_preprocessing = []
+    
+    def append_step(original, processed, step_name):
+        if original != processed:
+            step_preprocessing.append(step_name)
 
-Cher(e) [Nom du destinataire],
-
-J'espère que vous allez bien.
-
-Suite à nos dernières discussions, j'aimerais aborder trois sujets majeurs pour nos prochains sprints. Ces sujets, stratégiques pour notre développement, méritent des ateliers de maturation pour mieux cerner nos besoins et orienter efficacement nos développements.
-
-1. Système d'alerte : Définir et implémenter les règles de grappage
-
-Questions d'éclaircissements :
-Quels sont les critères précis qui doivent déclencher une alerte ?
-Comment envisagez-vous la gestion des faux positifs dans le système d'alerte ?
-Souhaitez-vous une alerte en temps réel ou existe-t-il un délai acceptable entre la détection et l'alerte ?
-2. Page Secteur : Détecter les chiffres clés
-
-Questions d'éclaircissements :
-Quels types de chiffres clés sont prioritaires à identifier ?
-Devons-nous considérer certains secteurs comme prioritaires par rapport à d'autres ?
-Quelle est la fréquence de mise à jour souhaitée pour ces chiffres clés ?
-3. Page contreparties : Permettre l'identification des prospects
-
-Questions d'éclaircissements :
-Comment définissez-vous un "prospect" dans le contexte de la page contreparties ?
-Existe-t-il des critères spécifiques qui distinguent un prospect d'une contrepartie standard ?
-Souhaitez-vous intégrer une fonctionnalité de suivi ou de scoring pour ces prospects ?
-Concernant la mise en place des ateliers de maturation, nous sommes flexibles sur le format. Nous pouvons les organiser de manière collaborative avec les différentes parties prenantes et, si nécessaire, y associer les équipes métier pour bien définir les besoins.
-
-Veuillez nous indiquer vos disponibilités pour ces ateliers afin que nous puissions les planifier dans les meilleurs délais.
-
-En attendant, n'hésitez pas si vous avez des questions ou besoin de précisions supplémentaires sur ces sujets.
-
-Au plaisir d'avancer ensemble sur ces points.
-
-Cordialement,
-
-[Votre Nom]
-Consultant Expert Data
-
-
+    original = company
+    company = self.remove_accents(company)
+    append_step(original, company, 'remove_accents')
+    
+    original = company
+    company = company.lower()
+    append_step(original, company, 'lowercase')
+    
+    original = company
+    company = re.sub(r"\b(?:[a-z]\.){2,}\b", lambda m: m.group(0).replace(".", ""), company)
+    append_step(original, company, 'normalize_acronyms')
+    
+    original = company
+    company = re.sub(r"[^\w\s]", " ", company)
+    append_step(original, company, 'remove_special_characters')
+    
+    original = company
+    company = " ".join(company.split())
+    append_step(original, company, 'remove_extra_spaces')
+    
+    original = company
+    company = re.sub(r"(?<=\b\w\b) (?=\b\w\b)", "", company)
+    append_step(original, company, 'merge_single_letters')
+    
+    for key, value in self.and_mapping.items():
+        original = company
+        company = re.sub(rf"\b{key}\b", value, company)
+        append_step(original, company, 'and_mapping')
+    
+    for key, value in self.digits_mapping.items():
+        original = company
+        company = re.sub(rf"\b{key}\b", str(value), company)
+        append_step(original, company, 'digits_mapping')
+    
+    original = company
+    company = company.strip()
+    append_step(original, company, 'final_strip')
+    
+    words = company.lower().split(" ")
+    good_words = []
+    if len(words) > 1:
+        if remove_acronyms:
+            for word in words:
+                if word in self.stopwords or word in self.acronyms:
+                    continue
+                good_words.append(word)
+            original = company
+            company = " ".join(good_words)
+            append_step(original, company, 'remove_acronyms')
+        
+        if remove_locations:
+            original = company
+            company = self.remove_exact_matches(company, self.locations, use_blacklist=True)
+            append_step(original, company, 'remove_locations')
+    
+    original = company
+    company = " ".join(company.split())
+    append_step(original, company, 'remove_extra_spaces_final')
+    
+    original = company
+    company = company.strip()
+    append_step(original, company, 'final_strip_again')
+    
+    # Join all the preprocessing steps into a single string
+    step_preprocessing_str = ", ".join(step_preprocessing)
+    
+    return company, step_preprocessing_str
