@@ -1,3 +1,40 @@
-158 - Système alerte : Définir et implémenter les règles de grappage du système d'alerte
-103 - Page Secteur :  Détecter les chiffres clés
-125 -  Page contreparties : Permettre l'identification des prospects dans les pages contreparties
+Objet : Ateliers de maturation pour les prochains sprints : Système d'alerte, Page Secteur & Page contreparties
+
+Cher(e) [Nom du destinataire],
+
+J'espère que vous allez bien.
+
+Suite à nos dernières discussions, j'aimerais aborder trois sujets majeurs pour nos prochains sprints. Ces sujets, stratégiques pour notre développement, méritent des ateliers de maturation pour mieux cerner nos besoins et orienter efficacement nos développements.
+
+1. Système d'alerte : Définir et implémenter les règles de grappage
+
+Questions d'éclaircissements :
+Quels sont les critères précis qui doivent déclencher une alerte ?
+Comment envisagez-vous la gestion des faux positifs dans le système d'alerte ?
+Souhaitez-vous une alerte en temps réel ou existe-t-il un délai acceptable entre la détection et l'alerte ?
+2. Page Secteur : Détecter les chiffres clés
+
+Questions d'éclaircissements :
+Quels types de chiffres clés sont prioritaires à identifier ?
+Devons-nous considérer certains secteurs comme prioritaires par rapport à d'autres ?
+Quelle est la fréquence de mise à jour souhaitée pour ces chiffres clés ?
+3. Page contreparties : Permettre l'identification des prospects
+
+Questions d'éclaircissements :
+Comment définissez-vous un "prospect" dans le contexte de la page contreparties ?
+Existe-t-il des critères spécifiques qui distinguent un prospect d'une contrepartie standard ?
+Souhaitez-vous intégrer une fonctionnalité de suivi ou de scoring pour ces prospects ?
+Concernant la mise en place des ateliers de maturation, nous sommes flexibles sur le format. Nous pouvons les organiser de manière collaborative avec les différentes parties prenantes et, si nécessaire, y associer les équipes métier pour bien définir les besoins.
+
+Veuillez nous indiquer vos disponibilités pour ces ateliers afin que nous puissions les planifier dans les meilleurs délais.
+
+En attendant, n'hésitez pas si vous avez des questions ou besoin de précisions supplémentaires sur ces sujets.
+
+Au plaisir d'avancer ensemble sur ces points.
+
+Cordialement,
+
+[Votre Nom]
+Consultant Expert Data
+
+
