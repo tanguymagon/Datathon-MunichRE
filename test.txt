@@ -1,55 +1,29 @@
-Features à rajouter en discussion
+Présentation: Démonstration de l'application de surveillance continue "GoldenEye".
 
- 
+1. Features à rajouter/discutés:
 
-Canal teams ou sur l'appli ?
+Plateforme de discussion: Doit-on utiliser le canal Teams ou l'application directement pour les discussions?
+Création d'alertes: Virginie a suggéré une fonctionnalité ou un petit "plus" pour créer une nouvelle alerte.
+Moteur de recherche: Il y a un score de pertinence faible concernant le sujet "bourse" avec le moteur de recherche actuel.
+Design du bandeau: Une demande d'amélioration du design (rendu "sexy") du bandeau a été faite. Une mise à jour sera disponible mardi, avec un bouton pour consulter les autres articles afin de suivre les tendances.
+2. Problèmes rencontrés:
 
-Petit "plus" pour créer nouvelle alerte ? virginie
+Données: Les données présentées sont de 2019, mais nous sommes en 2023. Cela nécessite une mise à jour.
+Recherche de contrepartie: Un exemple spécifique a été donné où "Les grands chais de France" n'apparaissait pas correctement dans les résultats de recherche.
+3. Points à retenir:
 
-Sujet bourse score de pertinence faible avec le moteur de recherche intelligent
+Développement actuel: L'application est actuellement en phase de développement et sera testée ("bench") avant d'être mise en production.
+Navigation: Des clarifications doivent être apportées concernant la navigation dans le bandeau lors de la prochaine démo.
+Fréquence de scrapping: Les données sont scrapées une fois par semaine.
+Système de recherche: Il est important de mettre l'accent sur la page de recherche de contrepartie, permettant de rechercher une contrepartie via le SIREN et l'id_fédéral.
+Etudes de secteur: Seules les données du secteur PIM sont disponibles. Les autres secteurs ne contiennent pas de données.
+Sous-secteurs et zones géographiques: Les options pour sélectionner des sous-secteurs et zones géographiques sont actuellement grises. Cette limitation doit être maintenue pour l'instant.
+Thématiques: Il n'y a pas de page dédiée aux thèmes, mais il est possible de lier un secteur à un thème spécifique.
+4. Développements futurs:
 
-Demande sexy au niveau du bandeau - à faire rapidement
-
-==>Il le sera mardi dispo bouton à voir les autres articles pour les tendances
-
- 
-
-Pb rencontrés
-
-Etudes Données 2019  et la c'est en 2023 ?
-
-"Les grands chais de France" exemple de contrepartie qui ne remonte pas bien
-
- 
-
-Point à retenir
-
-Application en dev en ce moment et sera mis en bench et prod par la suite
-
-Sujet bandeau à préciser à la démo pour aller vers les côtés - navigation
-
-Scrapping une fois par semaine
-
-Bien préciser que le système de recherche - page de recherhce contrepartie pour rechercher une contrepartie avec le SIREN et l'id_fédéral
-
-Etudes que sur secteur PIM, les autres no data
-
-Sélectionner en sous secteurs ? Grisé pour le moment à garder
-
-Pareil pour zone géographique
-
-Pas de page thème mais peut lier secteur à un thème
-
- 
-
-Dev futur
-
-Avec les équipes de david sereau ? Spécifier la demande et que ça proviennent des UX UI
-
-Insertion des données INSEE page secteur - côté front déjà commencé
-
-On a tous ce qu'il faut, travaux identification unique des contrepartie en priorité
-
-Ingestion des données déjà faite
-
-Sujet principale et bourse pas encore fait - en développement
+Collaboration: Une discussion avec les équipes de David Sereau est à envisager. L'importance de spécifier la demande et de s'assurer qu'elle provient des équipes UX/UI a été soulignée.
+Données INSEE: L'insertion des données de l'INSEE sur la page secteur est en cours, avec des travaux déjà initiés côté front.
+Identification des contreparties: Le travail prioritaire est l'identification unique des contreparties.
+Intégration des données: L'ingestion des données est déjà réalisée.
+Sujets principaux: Les sujets principaux et bourse sont en cours de développement.
+Prochaine étape: [Indiquer les prochaines étapes, par exemple une date pour la prochaine démo, des réunions de suivi, etc.]
