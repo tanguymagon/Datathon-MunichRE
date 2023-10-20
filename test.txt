@@ -1,78 +1,55 @@
-def __call__(self, company: str, remove_acronyms: bool, remove_locations: bool) -> str:
-    if not isinstance(company, str):
-        raise TypeError(f"company must be a string and not {type(company)}")
-    
-    # Initialize step_preprocessing list
-    step_preprocessing = []
-    
-    def append_step(original, processed, step_name):
-        if original != processed:
-            step_preprocessing.append(step_name)
+Features à rajouter en discussion
 
-    original = company
-    company = self.remove_accents(company)
-    append_step(original, company, 'remove_accents')
-    
-    original = company
-    company = company.lower()
-    append_step(original, company, 'lowercase')
-    
-    original = company
-    company = re.sub(r"\b(?:[a-z]\.){2,}\b", lambda m: m.group(0).replace(".", ""), company)
-    append_step(original, company, 'normalize_acronyms')
-    
-    original = company
-    company = re.sub(r"[^\w\s]", " ", company)
-    append_step(original, company, 'remove_special_characters')
-    
-    original = company
-    company = " ".join(company.split())
-    append_step(original, company, 'remove_extra_spaces')
-    
-    original = company
-    company = re.sub(r"(?<=\b\w\b) (?=\b\w\b)", "", company)
-    append_step(original, company, 'merge_single_letters')
-    
-    for key, value in self.and_mapping.items():
-        original = company
-        company = re.sub(rf"\b{key}\b", value, company)
-        append_step(original, company, 'and_mapping')
-    
-    for key, value in self.digits_mapping.items():
-        original = company
-        company = re.sub(rf"\b{key}\b", str(value), company)
-        append_step(original, company, 'digits_mapping')
-    
-    original = company
-    company = company.strip()
-    append_step(original, company, 'final_strip')
-    
-    words = company.lower().split(" ")
-    good_words = []
-    if len(words) > 1:
-        if remove_acronyms:
-            for word in words:
-                if word in self.stopwords or word in self.acronyms:
-                    continue
-                good_words.append(word)
-            original = company
-            company = " ".join(good_words)
-            append_step(original, company, 'remove_acronyms')
-        
-        if remove_locations:
-            original = company
-            company = self.remove_exact_matches(company, self.locations, use_blacklist=True)
-            append_step(original, company, 'remove_locations')
-    
-    original = company
-    company = " ".join(company.split())
-    append_step(original, company, 'remove_extra_spaces_final')
-    
-    original = company
-    company = company.strip()
-    append_step(original, company, 'final_strip_again')
-    
-    # Join all the preprocessing steps into a single string
-    step_preprocessing_str = ", ".join(step_preprocessing)
-    
-    return company, step_preprocessing_str
+ 
+
+Canal teams ou sur l'appli ?
+
+Petit "plus" pour créer nouvelle alerte ? virginie
+
+Sujet bourse score de pertinence faible avec le moteur de recherche intelligent
+
+Demande sexy au niveau du bandeau - à faire rapidement
+
+==>Il le sera mardi dispo bouton à voir les autres articles pour les tendances
+
+ 
+
+Pb rencontrés
+
+Etudes Données 2019  et la c'est en 2023 ?
+
+"Les grands chais de France" exemple de contrepartie qui ne remonte pas bien
+
+ 
+
+Point à retenir
+
+Application en dev en ce moment et sera mis en bench et prod par la suite
+
+Sujet bandeau à préciser à la démo pour aller vers les côtés - navigation
+
+Scrapping une fois par semaine
+
+Bien préciser que le système de recherche - page de recherhce contrepartie pour rechercher une contrepartie avec le SIREN et l'id_fédéral
+
+Etudes que sur secteur PIM, les autres no data
+
+Sélectionner en sous secteurs ? Grisé pour le moment à garder
+
+Pareil pour zone géographique
+
+Pas de page thème mais peut lier secteur à un thème
+
+ 
+
+Dev futur
+
+Avec les équipes de david sereau ? Spécifier la demande et que ça proviennent des UX UI
+
+Insertion des données INSEE page secteur - côté front déjà commencé
+
+On a tous ce qu'il faut, travaux identification unique des contrepartie en priorité
+
+Ingestion des données déjà faite
+
+Sujet principale et bourse pas encore fait - en développement
