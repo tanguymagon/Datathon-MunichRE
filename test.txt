@@ -1,30 +1,12 @@
-Stratégie de Construction de la Base de Backtesting pour la Recherche et Résolution d'Entité Nommée
+Bonjour Marine, Emmanuel,
 
-Contexte:
+Pour donner suite à notre point de murissements sur les différentes initiatives, vous trouvez ci-joint une slide présentant les ateliers de murissements que nous avons définis ensemble.
+Ainsi, pendant notre premier point de suivi de l’application GoldenEye, les parties prenantes concernées pourrons manifester leur intérêt pour les ateliers auxquels ils souhaitent participer.
 
-Atelier de brainstorming pour définir les populations cibles.
-Populations Ciblées:
-a. Population 1:
+J’ai aussi pris la liberté de rajouter le sujet « Analyse de sentiment » afin de rappeler notre souhait de présenter à ceux qui le souhaitent comment le score de sentiment est calculé mais aussi les travaux en cours pour l’améliorer.
 
-Entités fréquemment détectées par notre NER dans les articles de presse.
-b. Population 2 - Grand Corp:
-Seuil actuel : CA ≥ 500M (modifiable en fonction des besoins futurs).
-c. Population 3 - Cas Complexes:
-Entreprises avec des numéros, acronymes et stopwords.
-d. Population 4 - Petit Corp Aléatoire:
-CA ≥ 100M.
-e. Population 5 - Base Totale Aléatoire.
-Volumes:
+Je reste à votre disposition si vous avez des questions ou des modifications que vous souhaitez effectuer.
 
-À définir pour chaque population pour garantir la représentativité.
-Processus d'Annotation:
-a. Méthode:
+Excellent week-end à vous,
 
-S'inspirer du processus utilisé pour le portefeuille standardisé.
-b. Objectif:
-Identifier et comprendre les anomalies dans le pipeline de NER.
-Résultats Attendus:
-
-Base de backtesting robuste et représentative.
-Enrichissement de la connaissance sur les anomalies potentielles.
-Optimisation continue du pipeline de recherche et résolution d'entité nommée.
+Tanguy
