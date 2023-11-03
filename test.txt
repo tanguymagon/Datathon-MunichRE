@@ -1,12 +1,11 @@
-Bonjour Marine, Emmanuel,
+Faisant suite à notre récente réunion sur les initiatives en cours, veuillez trouver en pièce jointe la présentation des ateliers de développement que nous avons conjointement définis.
 
-Pour donner suite à notre point de murissements sur les différentes initiatives, vous trouvez ci-joint une slide présentant les ateliers de murissements que nous avons définis ensemble.
-Ainsi, pendant notre premier point de suivi de l’application GoldenEye, les parties prenantes concernées pourrons manifester leur intérêt pour les ateliers auxquels ils souhaitent participer.
+Lors de notre prochain point de suivi concernant l’application GoldenEye, les parties prenantes auront l’opportunité d'exprimer leur intérêt pour les ateliers auxquels elles désirent contribuer.
 
-J’ai aussi pris la liberté de rajouter le sujet « Analyse de sentiment » afin de rappeler notre souhait de présenter à ceux qui le souhaitent comment le score de sentiment est calculé mais aussi les travaux en cours pour l’améliorer.
+J’ai également inclus le sujet « Analyse des sentiments » pour nous rappeler de présenter, à ceux intéressés, la méthode de calcul du score de sentiment et les efforts en cours pour son amélioration.
 
-Je reste à votre disposition si vous avez des questions ou des modifications que vous souhaitez effectuer.
+Je reste à votre entière disposition pour répondre à vos questions ou discuter d’éventuelles modifications.
 
-Excellent week-end à vous,
+Je vous souhaite un excellent week-end,
 
 Tanguy
