@@ -1,14 +1,15 @@
 CREATE VIEW company_exposition_view AS
 SELECT
-	co.id_company,
-	co.id_federal,
-	co.siren,
-	co.raison_sociale,
-	co.code_groupe,
-	co.alias,
-	co.etat_administratif,
-	expo.exposition,
-	co.date_arrete
+    co.id_company,
+    co.id_federal,
+    co.siren,
+    co.raison_sociale,
+    co.code_groupe,
+    co.alias,
+    co.etat_administratif,
+    expo.exposition,
+    co.date_arrete
 FROM [dbo].[Company] co
 INNER JOIN [dbo].[expositions] expo 
-ON co.id_federal = expo.id_federal AND co.siren = expo.siren
+ON (co.id_federal != 0 AND co.id_federal = expo.id_federal AND co.siren = expo.siren)
+    OR (co.id_federal = 0 AND co.siren = expo.siren);
