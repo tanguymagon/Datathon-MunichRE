@@ -1,11 +1,14 @@
-Faisant suite à notre récente réunion sur les initiatives en cours, veuillez trouver en pièce jointe la présentation des ateliers de développement que nous avons conjointement définis.
-
-Lors de notre prochain point de suivi concernant l’application GoldenEye, les parties prenantes auront l’opportunité d'exprimer leur intérêt pour les ateliers auxquels elles désirent contribuer.
-
-J’ai également inclus le sujet « Analyse des sentiments » pour nous rappeler de présenter, à ceux intéressés, la méthode de calcul du score de sentiment et les efforts en cours pour son amélioration.
-
-Je reste à votre entière disposition pour répondre à vos questions ou discuter d’éventuelles modifications.
-
-Je vous souhaite un excellent week-end,
-
-Tanguy
+CREATE VIEW company_exposition_view AS
+SELECT
+	co.id_company,
+	co.id_federal,
+	co.siren,
+	co.raison_sociale,
+	co.code_groupe,
+	co.alias,
+	co.etat_administratif,
+	expo.exposition,
+	co.date_arrete
+FROM [dbo].[Company] co
+INNER JOIN [dbo].[expositions] expo 
+ON co.id_federal = expo.id_federal AND co.siren = expo.siren
