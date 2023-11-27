@@ -1,15 +1,18 @@
-CREATE VIEW company_exposition_view AS
-SELECT
-    co.id_company,
-    co.id_federal,
-    co.siren,
-    co.raison_sociale,
-    co.code_groupe,
-    co.alias,
-    co.etat_administratif,
-    expo.exposition,
-    co.date_arrete
-FROM [dbo].[Company] co
-INNER JOIN [dbo].[expositions] expo 
-ON (co.id_federal != 0 AND co.id_federal = expo.id_federal AND co.siren = expo.siren)
-    OR (co.id_federal = 0 AND co.siren = expo.siren);
+Context & User Persona
+•	Add the recap of “What’s the problem, for who” and “Why do we want to solve it” 
+(from the Product Doc)
+•	Add the success metrics of the project
+•	Add the scope of the project (the Must and Should that were prioritized)
+Global Workflow: Releases & User Stories
+•	Write macro user stories explaining the global workflow of the feature and split them into several releases (if applicable). 
+Ex for Airbnb: As a new host with an incomplete profile, when I create my listing, I should see a new section asking me to add pictures
+Workflow Diagram & Designs
+•	Add link to prototype and/or screen by screen designs
+•	Add also the copy
+Edge Cases
+•	Think about the edge cases (if there is a workflow diagram, they should be included in it)
+Tracking Plan
+•	How will you measure the success? Define here the elements that need to be tracked. 
+If complex, add a link to the tracking plan (example here). 
+Test Plan & Rollout
+For now, do not fill the “test plan” and "rollout" section. We'll see that in the coming days!
