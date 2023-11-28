@@ -1,56 +1,15 @@
-Contexte et Persona Utilisateur
-Résumé du Problème :
-Les analystes de risques dans les institutions financières doivent actuellement ajouter et suivre manuellement les entreprises dans leur application de suivi d'entreprise. Ce processus est chronophage et peu efficace, surtout pour les analystes gérant de grands portefeuilles d'entreprises. Les principaux utilisateurs confrontés à ce problème sont les analystes de risques responsables de la surveillance des nouvelles et des activités des entreprises pour évaluer le risque de défaut de paiement.
+Hello Marga & Yani & team -
 
-Besoin de la Solution :
-La mise en œuvre d'une fonctionnalité permettant de télécharger un portefeuille d'entreprises via un fichier Excel va considérablement rationaliser le processus de suivi. Elle permettra aux analystes d'ajouter rapidement plusieurs entreprises à leur liste de surveillance, améliorant ainsi la productivité et garantissant une évaluation des risques plus opportune et efficace.
+Just looking at the article accession number it was generated 20230605 - that is this year June the 5th.
+ 
+If you think of streams as roughly analogous to Factiva alerts - and snapshots to be roughly analogous to an a Factiva archive search.
+ 
+Not a perfect analogy, but conceptually pretty good in this particular.
+ 
+The stream is essentially news moving forward with a very limited archive.
+ 
+This stream was not created until July - about a month after the article was published.
+ 
+Without checking anything else, this seems to be why the article was not associated with the stream.
 
-Métriques de Succès du Projet
-Efficacité Temporelle : Réduction du temps nécessaire pour ajouter des entreprises à la liste de surveillance.
-Taux d'Adoption par les Utilisateurs : Pourcentage d'analystes utilisant la nouvelle fonctionnalité pour les téléchargements de portefeuille.
-Taux d'Erreur : Diminution des erreurs de saisie de données par rapport à l'ajout manuel.
-Satisfaction des Utilisateurs : Retours positifs des sondages auprès des utilisateurs et diminution des plaintes.
-Portée du Projet
-Fonctionnalités Indispensables :
-
-Téléchargement de Fichier Excel : Capacité à télécharger un fichier Excel contenant une liste d'entreprises.
-Ajout Automatique d'Entreprises : Le système ajoute automatiquement les entreprises du fichier téléchargé à la liste de surveillance de l'utilisateur.
-Validation des Données : Contrôles pour la cohérence des formats et des données dans le fichier Excel.
-Fonctionnalités Souhaitables :
-
-Détection de Doublons : Identifier et alerter sur les entrées en double dans le téléchargement.
-Intégration de Données Historiques : Récupération automatique des données historiques des nouvelles entreprises ajoutées.
-Flux de Travail Global : Versions et Histoires Utilisateurs
-Histoire Macro Utilisateur :
-En tant qu'analyste de risques, je souhaite télécharger une liste d'entreprises via un fichier Excel afin de pouvoir surveiller efficacement plusieurs entités sans avoir à les ajouter une à une manuellement.
-
-Version 1 : Fonctionnalité de Base de Téléchargement
-
-En tant qu'utilisateur, lorsque je choisis d'ajouter de nouvelles entreprises, je devrais avoir la possibilité de télécharger un fichier Excel.
-Version 2 : Validation des Données et Gestion des Erreurs
-
-En tant qu'utilisateur, si mon fichier téléchargé présente des problèmes de formatage, je devrais recevoir des instructions claires sur la façon de les corriger.
-Version 3 : Fonctionnalités Avancées
-
-En tant qu'utilisateur, si je télécharge un fichier avec des entrées en double, je devrais être informé et disposer d'options pour résoudre ce problème.
-Diagramme de Flux de Travail et Conceptions
-Lien vers Prototype/Conceptions : [Insérer le lien vers les conceptions UI/UX ici]
-
-Conceptions écran par écran illustrant le processus de téléchargement de fichier, la validation des données et les mécanismes de retour utilisateur.
-Copie pour les Éléments de l'UI : [Insérer la copie spécifique pour les éléments de l'UI ici]
-
-Cas Limites
-Format de Fichier Incorrect : L'utilisateur télécharge un fichier non Excel.
-Fichiers Volumineux : Gestion des téléchargements avec un très grand nombre d'entreprises.
-Données Incomplètes : Informations essentielles manquantes dans le fichier Excel.
-Plan de Suivi
-Éléments à Suivre :
-
-Nombre de Téléchargements : Fréquence et volume des téléchargements de fichiers.
-Taux de Réussite/Échec des Téléchargements : Pour identifier les problèmes ou bugs communs.
-Interaction des Utilisateurs avec les Messages d'Erreur : Comprendre le comportement des utilisateurs en cas d'échec du téléchargement.
-Document de Plan de Suivi Détaillé : [Insérer le lien vers le document ici]
-
-Plan de Test et Déploiement
-
-À discuter dans les prochains jours.
+If a meeting is still desirable, please provide an agenda, so that I can make sure we have people with the appropriate skill set, and have time to prepare.
