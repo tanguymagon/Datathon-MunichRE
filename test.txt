@@ -1,4 +1,1 @@
-https://uxdesign.cc/how-i-write-product-specifications-d7d759c7d471
-https://theproductperson.substack.com/p/-how-to-write-great-microcopy
-https://medium.com/@george_wilde/a-guide-to-writing-effective-user-stories-658823dec2e0
-https://usefyi.com/templates/product-requirements-document-templates/
+Failed to execute query. Error: Explicit value must be specified for identity column in table 'establishments' either when IDENTITY_INSERT is set to ON or when a replication user is inserting into a NOT FOR REPLICATION identity column.
