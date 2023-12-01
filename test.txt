@@ -1,15 +1,4 @@
-Hello Marga & Yani & team -
-
-Just looking at the article accession number it was generated 20230605 - that is this year June the 5th.
- 
-If you think of streams as roughly analogous to Factiva alerts - and snapshots to be roughly analogous to an a Factiva archive search.
- 
-Not a perfect analogy, but conceptually pretty good in this particular.
- 
-The stream is essentially news moving forward with a very limited archive.
- 
-This stream was not created until July - about a month after the article was published.
- 
-Without checking anything else, this seems to be why the article was not associated with the stream.
-
-If a meeting is still desirable, please provide an agenda, so that I can make sure we have people with the appropriate skill set, and have time to prepare.
+https://uxdesign.cc/how-i-write-product-specifications-d7d759c7d471
+https://theproductperson.substack.com/p/-how-to-write-great-microcopy
+https://medium.com/@george_wilde/a-guide-to-writing-effective-user-stories-658823dec2e0
+https://usefyi.com/templates/product-requirements-document-templates/
