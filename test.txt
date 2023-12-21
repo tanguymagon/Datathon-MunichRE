@@ -1,1 +1,18 @@
-Failed to execute query. Error: Explicit value must be specified for identity column in table 'establishments' either when IDENTITY_INSERT is set to ON or when a replication user is inserting into a NOT FOR REPLICATION identity column.
+Enrichissement des dictionnaires de contreparties (internationales, alias)
+Mise en place d'un tableau de bord / KPI suivi de nos objectifs annuels
+BODACC
+Analyse concurentielle
+Focus Risque de réputation
+Papers (panama papers, etc…)
+"Dette technique
+- Data Lineage (se backer en fonction des sources de données)"
+Pipeline d'analyse de retours in app/ Dashboard
+Pertinence des alertes
+Alertes qui incrimineraient un client, scandales ou controverses
+Stratégie de communication (emailing, nouvelles fonctionnalités, newsletter, etc..)
+Sauvegarde de recherches / Prompt et création d'alertes sur cette recherche
+Scraping études
+Accueil section "Mes contreparties" revoir l'UX (filtrer mes contreparties ?)
+
+Revoir la pertinence des sujets tendances (période, clustering)
+
