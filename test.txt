@@ -1,2 +1,47 @@
+Contexte et Persona Utilisateur
+Résumé du problème :
+Les équipes de développement et d'opérations rencontrent des difficultés à optimiser les coûts des services Azure utilisés par l'application. Cela entraîne une surutilisation des ressources et des coûts plus élevés que nécessaire, affectant le budget alloué et l'efficacité opérationnelle.
+
+Besoin de la solution :
+Développer des fonctionnalités et des outils pour surveiller, analyser et optimiser l'utilisation des ressources Azure afin de réduire les coûts tout en maintenant ou en améliorant les performances de l'application.
+
+Métriques de succès
+Réduction des coûts : pourcentage de réduction des coûts Azure après mise en œuvre.
+Utilisation optimisée des ressources : rapport entre l'utilisation des ressources et les besoins réels.
+Satisfaction des utilisateurs : retours positifs des équipes de développement et d'opérations.
+Portée du Projet
+Must have :
+
+Outils de surveillance des coûts : capacité à surveiller en temps réel l'utilisation des ressources Azure.
+Rapports d'optimisation : recommandations automatiques pour l'ajustement des ressources.
+Should have :
+
+Interface utilisateur pour la gestion des coûts : permettre aux utilisateurs de visualiser et de gérer les coûts facilement.
+Alertes automatisées : notifications en cas de dépassement de seuil de coûts prédéfinis.
+Flux de travail global : Releases & User Stories
+Macro :
+
+En tant que responsable des opérations, je souhaite avoir un tableau de bord des coûts Azure pour identifier rapidement les zones d'optimisation potentielles.
+Version 0 : Back End optimisé
+
+En tant que développeur, je peux accéder à des rapports détaillés sur l'utilisation des ressources Azure pour optimiser le code et l'architecture.
+Version 1 : Fonctionnalité de base de suivi des coûts
+
+En tant qu'utilisateur, je peux visualiser les coûts actuels et historiques des services Azure pour prendre des décisions éclairées sur l'utilisation des ressources.
+Version 2 : Intégration des recommandations d'optimisation
+
+En tant qu'utilisateur, je reçois des recommandations automatisées pour ajuster l'utilisation des ressources afin de réduire les coûts.
+Diagramme de Workflow & Designs
+[Inclure les diagrammes de flux de travail et les maquettes de l'interface utilisateur]
+
+Cas Limites
+Changements de tarification Azure : ajustements nécessaires en cas de modification des coûts des services Azure.
+Besoins en performance élevés : gestion de l'équilibre entre coût et performance pour les applications critiques.
+Plan de Suivi
+Suivi des réductions de coûts : mesurer l'efficacité de l'optimisation sur une période donnée.
+Taux d'adoption des recommandations : pourcentage d'optimisations appliquées par les utilisateurs.
+Plan de Test & Déploiement
+[À définir]
+
 
 
