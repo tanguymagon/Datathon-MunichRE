@@ -1,18 +1,15 @@
-Enrichissement des dictionnaires de contreparties (internationales, alias)
-Mise en place d'un tableau de bord / KPI suivi de nos objectifs annuels
-BODACC
-Analyse concurentielle
-Focus Risque de réputation
-Papers (panama papers, etc…)
-"Dette technique
-- Data Lineage (se backer en fonction des sources de données)"
-Pipeline d'analyse de retours in app/ Dashboard
-Pertinence des alertes
-Alertes qui incrimineraient un client, scandales ou controverses
-Stratégie de communication (emailing, nouvelles fonctionnalités, newsletter, etc..)
-Sauvegarde de recherches / Prompt et création d'alertes sur cette recherche
-Scraping études
-Accueil section "Mes contreparties" revoir l'UX (filtrer mes contreparties ?)
+Bonjour François,
 
-Revoir la pertinence des sujets tendances (période, clustering)
+Merci pour ton message, excellente et belle année à toi ! 2024 sera en effet l’année de GoldenEye !
+Les développeurs étaient en vacances mais sont revenus aujourd’hui, je leur en parle cette après midi pour que l’on puisse te les ajouter. 
+Le retour progressif des équipes ainsi que le nombre important de demande de comptes et de paramétrage à faire va surement impacter le temps de livraison de ta demande. 
+
+Voudrais-tu, en plus de les suivre, recevoir des alertes sur ces contreparties ?
+
+Je te tiens au courant pour la suite,
+
+Bien à toi, 
+
+Tanguy
+
 
