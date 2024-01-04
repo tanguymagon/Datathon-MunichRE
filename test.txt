@@ -1,2 +1,1 @@
-Problème : Absence de détection d'événements importants concernant les entreprises
-Importance : L'incapacité du système à détecter des événements clés relatifs aux entreprises limite gravement sa pertinence et son efficacité. Cela peut entraîner des manques de réactivité face à des développements cruciaux et affecter négativement la prise de décision basée sur les analyses de ces événements.
+
