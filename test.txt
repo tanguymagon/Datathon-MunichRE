@@ -1,17 +1,23 @@
-Voici la template que je veux tu utilises pour faire les problèmes qui suivent : 
+Problème : Liaison défectueuse entre les contreparties et les entités dans les articles de presse
+Importance : Les erreurs dans le rattachement des contreparties aux entités détectées dans la presse nuisent à la fiabilité et à l'exactitude de l'analyse des données.
 
-Problème : le processus de connexion n’est pas optimisé pour les utilisateurs
-Importance : l’administration d’un système de user / mdp et la gêne utilisateur occasionnée n’est pas soutenable dans le cadre d’un déploiement d’ampleur
+Problème : Gestion incohérente des dénominations et alias des entreprises internationales
+Importance : Les incohérences dans l'identification des entreprises internationales compromettent l'intégrité des données et la précision des analyses commerciales.
 
+Problème : Accumulation de dette technique dans le système
+Importance : L'accumulation progressive de dette technique limite l'évolutivité du système et augmente le risque d'erreurs et de défaillances.
 
-Voici les problèmes : il faut que tu les transforme en problème si ils ne sont pas sous la bonne forme : 
-Certaines contreparties ne sont pas ou sont mal liées aux entités détectées dans les articles de presse
-Dénominations et alias des entreprises internationales
-Accumulation de dette technique
-Difficulté à suivre l’origine et la modification des données
-Classification thématique peu fiable
-Sujet tendance pas toujours pertinents 
-Détection d’évènements
+Problème : Traçabilité limitée de l'origine et des modifications des données
+Importance : La difficulté à suivre l'origine et les modifications des données affecte la transparence et la conformité aux normes de gouvernance des données.
+
+Problème : Classification thématique des données peu fiable
+Importance : Une classification thématique imprécise conduit à des analyses erronées et peut affecter la prise de décision basée sur ces données.
+
+Problème : Pertinence fluctuante des sujets tendance détectés
+Importance : La détection de sujets tendance non pertinents réduit l'utilité du système pour les utilisateurs finaux, affectant l'engagement et la satisfaction.
+
+Problème : Détection d’évènements inadéquate
+Importance : Une détection d'évènements inefficace peut entraîner un manque de réactivité aux développements importants, compromettant ainsi l'utilité du système en temps réel.
 
 
 
