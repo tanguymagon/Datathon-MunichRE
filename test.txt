@@ -1,1 +1,17 @@
+Voici la template que je veux tu utilises pour faire les problèmes qui suivent : 
+
+Problème : le processus de connexion n’est pas optimisé pour les utilisateurs
+Importance : l’administration d’un système de user / mdp et la gêne utilisateur occasionnée n’est pas soutenable dans le cadre d’un déploiement d’ampleur
+
+
+Voici les problèmes : il faut que tu les transforme en problème si ils ne sont pas sous la bonne forme : 
+Certaines contreparties ne sont pas ou sont mal liées aux entités détectées dans les articles de presse
+Dénominations et alias des entreprises internationales
+Accumulation de dette technique
+Difficulté à suivre l’origine et la modification des données
+Classification thématique peu fiable
+Sujet tendance pas toujours pertinents 
+Détection d’évènements
+
+
 
