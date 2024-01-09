@@ -1,1 +1,18 @@
+Macro solutions	
+Implémentation de tracking utilisateur (partie log)	X	
+Analyse des données utilisateur	X	
+Approfondir le système de traitement des homonymes		
+Améliorer la cartographie des Groupes et réaffecter l'association entité / raison sociale à la bonne société constituante du Groupe		
+Cartographier les groupes de contreparties homogènes n'étant pas traités par la chaîne de résolution d'entités actuellement en production		
+Permettre le paramétrage des portefeuilles à partir d'un fichier plat	X	
+Définir et implémenter les règles de grappage du système d'alerte		
+Analyse de sentiment		
+Ajouter les indices Banque de France à la visualisation dans l'élément graphe		
+Intégrer les logiques de grappage dans la gestion et l'affichage des pages contreparties		
+Développer un élément "Frise Chronologique" permettant de visualiser les faits marquants de la vie d'une entreprise		
+Permettre l'identification des prospects dans les pages contreparties		
+Gestion des contreparties sur la page d'accueil non optimiale		
+Ajouter le lien Suricate de chaque contrepartie dans la page (lien Squad Suricate)		
+Mettre en place la connexion SSO		
+Mettre en place une newsletter		
 
