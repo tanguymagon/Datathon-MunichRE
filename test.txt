@@ -1,18 +1,107 @@
-Macro solutions	
-Implémentation de tracking utilisateur (partie log)	X	
-Analyse des données utilisateur	X	
-Approfondir le système de traitement des homonymes		
-Améliorer la cartographie des Groupes et réaffecter l'association entité / raison sociale à la bonne société constituante du Groupe		
-Cartographier les groupes de contreparties homogènes n'étant pas traités par la chaîne de résolution d'entités actuellement en production		
-Permettre le paramétrage des portefeuilles à partir d'un fichier plat	X	
-Définir et implémenter les règles de grappage du système d'alerte		
-Analyse de sentiment		
-Ajouter les indices Banque de France à la visualisation dans l'élément graphe		
-Intégrer les logiques de grappage dans la gestion et l'affichage des pages contreparties		
-Développer un élément "Frise Chronologique" permettant de visualiser les faits marquants de la vie d'une entreprise		
-Permettre l'identification des prospects dans les pages contreparties		
-Gestion des contreparties sur la page d'accueil non optimiale		
-Ajouter le lien Suricate de chaque contrepartie dans la page (lien Squad Suricate)		
-Mettre en place la connexion SSO		
-Mettre en place une newsletter		
+1. Implémentation de tracking utilisateur (partie log)
+
+User Story: En tant que data analyst, je veux un suivi détaillé des interactions utilisateur pour analyser le comportement et améliorer l'expérience.
+Sous-tâches:
+Identifier les points d'interaction clés pour le tracking.
+Intégrer un système de tracking dans l'application.
+Stocker et sécuriser les logs utilisateur.
+Développer des dashboards pour l'analyse des logs.
+2. Analyse des données utilisateur
+
+User Story: En tant que data scientist, je souhaite analyser les données utilisateurs pour en extraire des tendances et améliorer les produits.
+Sous-tâches:
+Nettoyer et préparer les données pour l'analyse.
+Développer des modèles statistiques pour l'analyse de données.
+Créer des rapports et visualisations pour interpréter les résultats.
+3. Approfondir le système de traitement des homonymes
+
+User Story: En tant que développeur back-end, je veux améliorer le traitement des homonymes pour réduire les erreurs de correspondance.
+Sous-tâches:
+Analyser les cas d'homonymie actuels et leurs impacts.
+Développer une logique améliorée pour la distinction des homonymes.
+Tester et valider les améliorations avec des données réelles.
+4. Améliorer la cartographie des Groupes
+
+User Story: En tant que data engineer, je veux que la cartographie des groupes soit précise pour que les données reflètent la structure réelle des entités.
+Sous-tâches:
+Recueillir les exigences pour la réaffectation des entités.
+Développer un outil de mapping et de réaffectation.
+Valider les changements avec les parties prenantes.
+5. Cartographier les groupes de contreparties homogènes
+
+User Story: En tant que data analyst, je veux une cartographie précise des groupes de contreparties pour améliorer notre résolution d'entités.
+Sous-tâches:
+Identifier les groupes de contreparties homogènes non traités.
+Développer des règles pour la cartographie de ces groupes.
+Intégrer ces règles dans le système de résolution d'entités existant.
+6. Permettre le paramétrage des portefeuilles à partir d'un fichier plat
+
+User Story: En tant que gestionnaire de portefeuille, je veux importer des configurations à partir d'un fichier plat pour faciliter la gestion des portefeuilles.
+Sous-tâches:
+Créer une fonction d'importation de fichiers plats.
+Développer une interface utilisateur pour le paramétrage.
+Tester l'importation et l'application des paramètres de portefeuille.
+7. Définir et implémenter les règles de grappage du système d'alerte
+
+User Story: En tant que dev back-end, je veux définir des règles de grappage claires pour optimiser notre système d'alertes.
+Sous-tâches:
+Travailler avec des data scientists pour définir des règles.
+Implémenter des règles dans le système d'alerte.
+Tester l'efficacité du grappage des alertes.
+8. Analyse de sentiment
+
+User Story: En tant que data scientist, je souhaite implémenter une analyse de sentiment pour évaluer les perceptions de notre marque.
+Sous-tâches:
+Collecter des données pertinentes pour l'analyse de sentiment.
+Développer un modèle d'analyse de sentiment.
+Intégrer l'analyse de sentiment dans les rapports de données.
+9. Ajouter les indices Banque de France à la visualisation
+
+User Story: En tant que analyste financier, je veux que les indices de la Banque de France soient intégrés dans notre visualisation de données.
+Sous-tâches:
+Intégrer les indices dans la base de données.
+Développer des éléments graphiques pour la visualisation des indices.
+Valider l'intégration avec des utilisateurs finaux.
+10. Intégrer les logiques de grappage dans la gestion des pages contreparties
+
+User Story: En tant que dev front, je veux que les logiques de grappage soient reflétées sur les pages contreparties pour une meilleure clarté.
+Sous-tâches:
+Adapter l'UI pour présenter les données grappées.
+S'assurer de la cohérence des données présentées.
+Implémenter des tests utilisateurs pour recueillir des feedbacks.
+11. Développer un élément 'Frise Chronologique'
+
+User Story: En tant que dev front, je souhaite créer une frise chronologique pour visualiser facilement l'histoire d'une entreprise.
+Sous-tâches:
+Concevoir l'UI de la frise chronologique.
+Développer la logique de mise en données des événements historiques.
+Intégrer la frise dans les pages existantes.
+12. Permettre l'identification des prospects dans les pages contreparties
+
+User Story: En tant que commercial, je veux pouvoir identifier des prospects potentiels directement sur les pages contreparties.
+Sous-tâches:
+Développer des critères d'identification des prospects.
+Intégrer une fonction d'identification dans l'UI.
+Valider l'utilité avec l'équipe commerciale.
+13. Gestion des contreparties sur la page d'accueil non optimale
+
+User Story: En tant qu'utilisateur, je veux que la gestion des contreparties sur la page d'accueil soit intuitive et rapide.
+Sous-tâches:
+Évaluer les points faibles de l'UI actuelle.
+Redessiner l'UI pour améliorer l'expérience utilisateur.
+Implémenter les modifications et tester l'UX.
+14. Ajouter le lien Suricate de chaque contrepartie
+
+User Story: En tant qu'analyste de risque, je veux un accès rapide au profil Suricate de chaque contrepartie.
+Sous-tâches:
+Intégrer une fonctionnalité de lien direct vers Suricate.
+Assurer la sécurité et la confidentialité des liens.
+Tester l'intégration des liens pour la facilité d'accès.
+15. Mettre en place la connexion SSO
+
+User Story: En tant qu'employé, je veux me connecter via SSO pour simplifier l'accès aux multiples applications.
+Sous-tâches:
+Configurer l'infrastructure SSO.
+Intégrer SSO avec les applications existantes.
+Conduire des tests de sécurité pour la connexion SSO.
 
