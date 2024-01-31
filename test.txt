@@ -1,153 +1,57 @@
-French Institute of International Relations (IFRI) - Editorials: Propose des analyses et des éditoriaux sur les relations internationales et les grandes questions géopolitiques.
+MGA : 35% du gross prenium
+A&H 25% Gross written Premium
+3,4 billions of GPW
 
-Fondation pour la Recherche Stratégique (FRS) - Notes: Publie des études et des rapports sur des questions de défense, de sécurité et de stratégie.
+Educational Foundation: My career in data analysis and data science began with a solid educational foundation, rooted in economics and statistics. I obtained my Bachelor's degree in Economics from the prestigious Toulouse School of Economics, followed by a Master's in Statistics and Econometrics. This academic journey provided me with a deep understanding of economic principles and quantitative analysis, setting the stage for my entry into the professional world.
+Early Professional Experiences: After my first year of the Master's program, I seized an exciting opportunity to intern in Dubai for a Managing General Agent Lloyd's coverholder. Here, I served as a Data Analyst in the space sector and as a Data Scientist in the aviation sector. This role was my first foray into the practical application of data analytics in industry-specific contexts, offering valuable insights into complex data sets and their strategic implications.
+Apprenticeship and Early Career Growth: During my second Master's year, I embarked on an apprenticeship at BNP Paribas Personal Finance. Balancing academics and professional commitments, I worked as a Data Scientist while continuing my studies. This dual role not only honed my analytical skills but also taught me the art of juggling multiple responsibilities. Upon completion of my studies, BNP Paribas recognized my contributions and potential, leading to a full-time position where I stayed for three years.
+Seeking New Challenges: Despite that this role at BNP Paribas was quite comfortable for me, I found myself looking for more dynamic challenges and the opportunity to diversify my experience. This desire led me to EY, where I transitioned into a consulting role. At EY, I tackled various projects for major banks, contributing significantly to internal initiatives such as developing chatbots and gamification for HR processes. It allowed me to work with clients like Natixis and BPCE, further diversifying my professional portfolio, as Data analyst, Data Scientist and Product Ownerm.
+Continuous Learning and Engagement: Throughout my career, I have actively sought opportunities to engage in data challenges, participating in events hosted by ESCP in London and MunichRE in Munich, and contributing to projects at BNP. These experiences not only kept my analytical skills sharp but also fueled my passion for solving complex problems and delivering data-driven solutions.
+Why SiriusPoint? Now, as I stand at the next crossroads of my career, I am drawn to SiriusPoint for its dynamic and forward-thinking environment. SiriusPoint's reputation for innovation in data analytics and its commitment to leveraging data for strategic decision-making align perfectly with my career aspirations. I am eager to bring my diverse experience and passion for data analytics to SiriusPoint.
+In summary, my career journey, marked by a strong academic background, diverse professional experiences, and a continuous quest for challenges, has uniquely prepared me to contribute meaningfully to SiriusPoint.
 
-Droit de l'Environnement: Se concentre sur les aspects juridiques et réglementaires de l'environnement, offrant des analyses pour les professionnels du droit et les décideurs.
 
-Journal des Communes: Cible les élus et les professionnels des collectivités locales, traitant de sujets comme la gestion municipale et les politiques publiques locales.
 
-Global Retail News: Offre des informations sur les tendances et les innovations dans le secteur du commerce de détail au niveau mondial.
 
-CB Expert: Un magazine spécialisé dans les études de marché, le comportement des consommateurs et les stratégies média.
+3 reasons to leave consulting : 
 
-Technologies bancaires et sécurité informatique: Traite des nouvelles technologies dans le secteur bancaire, avec un accent sur la cybersécurité.
+My missions are focused on banks and by leaving bnp Paribas I was hoping to work more with insurance companies and risk analysis but the market conditions and opportunities at EY meant that I only took on projects for banks.
 
-Le Pharmacien: Magazine destiné aux professionnels de la pharmacie, traitant de sujets allant de la gestion de pharmacie aux nouvelles réglementations du secteur.
+Specialization and Focus: Actuarial data analysis is a specialized field that combines statistical analysis with financial theory to assess risk in the insurance and finance industries. Working at SiriusPoint would allow me to focus more deeply on this niche area, enhancing my expertise. 
+In the consulting world I realized that I would see only things in 2D instead of 3D
 
-News Assurances: Couvre le secteur des assurances, incluant les nouvelles tendances, les produits et les stratégies d'entreprise.
+Broader Impact: Actuarial analysis in reinsurance can have a significant impact on global financial stability and disaster response. My work at SiriusPoint could contribute to managing risks associated with catastrophic events, which might offer a sense of fulfillment and purpose.
 
-Suppléments Option Droit & Affaires: Fournit des analyses et des conseils juridiques dans le domaine des affaires, visant les professionnels du droit et les chefs d'entreprise.
+Question : 
+-	How is SiriusPoint adapting to technological advancements in the insurance industry, particularly in areas like artificial intelligence and machine learning, and what impact does this have on the actuarial team
+-	What is the technology stack at Sirius Point ?
+-	What are the main challenges SiriusPoint anticipates in the near future, and how is the company preparing to address them, especially from an actuarial perspective
+-	How is performance typically evaluated for actuarial positions, and what factors are considered most critical for success
+-	How does the career of a Data Analyst evolve within SiriusPoint?
+-	Is it possible to move to another sector?
 
-ITespresso.fr: Site d'information sur les technologies de l'information, couvrant les nouvelles, les tests de produits et les tendances du secteur IT.
+What I am expecting for this role
 
-Bases: Se concentre sur les systèmes d'information et les bases de données, offrant des insights pour les professionnels de l'IT.
+Joining SiriusPoint as an Actuarial Data Analyst, I'm looking forward to engaging in advanced data-driven projects. I anticipate working with sophisticated analytical techniques and tools, diving deep into predictive modeling, risk assessment, and financial forecasting. I'm also excited about the opportunities for professional development, enhancing my skills in both traditional actuarial science and modern data analytics through advanced software, industry workshops, and seminars. Moreover, I'm eager to play a collaborative and strategic role, contributing my analytical insights to the company's decision-making processes, especially in risk management and product development.
 
-Assurance Experts: Magazine destiné aux professionnels de l'assurance, abordant les aspects techniques, juridiques et commerciaux du secteur.
+Why Life Accident and Health ? 
 
-Systèmes de Paiement: Traite des évolutions et innovations dans les systèmes de paiement et les transactions financières.
+First, it has a profound personal impact, providing essential coverage that supports individuals and families during some of their most challenging times. This sector also offers complex and interesting risk assessment challenges, which are intellectually stimulating for an actuarial analyst. Additionally, it's a field that's heavily influenced by emerging trends in health and demographics, offering ongoing learning opportunities and the need for innovative product development. This aligns with my passion for making a difference through my analytical work while engaging with dynamically evolving risk landscapes.
 
-La Revue des Collectivités Locales: Fournit des informations et des analyses sur la gestion et le développement des collectivités territoriales.
+How Ai can impact the insurance market : 
 
-Datanews: Magazine dédié aux professionnels de l'IT, couvrant les dernières nouvelles et tendances du secteur des données et de la technologie.
+AI can significantly impact the Life and Health insurance market by enhancing personalized underwriting and pricing, improving customer experience through tailored services and recommendations, and by offering predictive analytics for better risk assessment and management. Additionally, AI can streamline claims processing with faster, more accurate decisions, and detect fraudulent activities more effectively. It also enables insurers to engage in proactive health management by analyzing personal health data to offer preventive measures, thereby potentially reducing claims and improving customer health outcomes.
 
-DeviceMed France: Publication spécialisée dans le secteur des dispositifs médicaux, couvrant les innovations, les réglementations et les tendances du marché.
 
-news aktuell OTS - Originaltextservice Suisse: Service de presse suisse fournissant des communiqués de presse et des informations d'entreprises.
+Defauts : 
 
-La Gazette des Communes: Un magazine destiné aux décideurs locaux, traitant des enjeux des collectivités locales en France.
+1.	Impatience: "I would say I have a sense of urgency in my work. This means I am eager to see results and can be impatient for progress. However, this drives me to work efficiently and push projects forward quickly, which in fast-paced environments, can be a strong advantage.
+2.	Stubbornness: "I'm someone who is very committed to my ideas and can be perceived as stubborn exemple when I wanted to do the master in statistics and ecometrics. But this also means I am dedicated and persistent when facing challenges. It's a trait that helps me stay the course on projects, ensuring they reach their full potential."
+3.	Distrust: "I approach new information with a critical eye and can be cautious in accepting facts at face value, which might come off as distrustful. However, this skepticism ensures that I thoroughly vet data and decisions, which is crucial in the field of actuarial science and risk management."
 
-La Vie du Rail Magazine: Se concentre sur le secteur ferroviaire, couvrant les actualités, les politiques de transport et les innovations technologiques.
 
-La Lettre de l'Assurance: Publication dédiée à l'actualité du secteur de l'assurance, destinée aux professionnels du domaine.
+Why moving from data science to data analytics : 
 
-Le Vif / L'Express: Magazine belge d'actualité couvrant une gamme étendue de sujets, y compris la politique, l'économie et la culture.
+Focus on Immediate Insights: Data analysts often focus on extracting actionable insights from data, which can be more immediately applicable to business decisions. This shift can be appealing for individuals interested in directly influencing business strategies and outcomes.
 
-News Press: Service de diffusion de communiqués de presse, couvrant divers sujets, y compris l'économie, la politique et la culture.
-
-Banque Experts: Magazine s'adressant aux professionnels du secteur bancaire, avec des analyses sur les tendances, les produits et les stratégies du secteur.
-
-RIA.fr - Revue de l'industrie agroalimentaire online: Magazine en ligne traitant des enjeux et des tendances de l'industrie agroalimentaire.
-
-Test-Achats invest: Publication offrant des conseils et des analyses pour les investisseurs, notamment dans le domaine des placements et des marchés
-
-Ville Rail et Transports: Magazine spécialisé dans les transports urbains, le ferroviaire et les politiques publiques associées.
-
-La Lettre A: Bulletin d'information sur les affaires publiques, les médias, et les entreprises, offrant des analyses et des informations exclusives.
-
-RIA - Revue de l'industrie agroalimentaire: Magazine couvrant l'actualité et les tendances de l'industrie agroalimentaire, incluant les innovations et les réglementations.
-
-La Lettre de l'Audiovisuel: Publication spécialisée dans le secteur de l'audiovisuel, couvrant les actualités, les tendances et les politiques du domaine.
-
-TOM - Travel on Move: Magazine dédié au tourisme et au voyage, offrant des informations sur les tendances, les innovations et les stratégies du secteur.
-
-L’Express-L’Impartial: Journal suisse couvrant l'actualité locale et internationale, avec un accent sur la politique, l'économie et la culture.
-
-RiskAssur: Magazine traitant des questions de risque, d'assurance et de gestion des risques pour les professionnels du secteur.
-
-L'Usine Nouvelle: Magazine industriel français couvrant l'actualité économique et technologique du secteur industriel.
-
-L’AGEFI - Nominations: Section du journal L'AGEFI consacrée aux mouvements et nominations dans le monde de la finance et de l'économie.
-
-Caractère Newsletter: Bulletin d'information sur l'industrie de l'imprimerie et du graphisme.
-
-ICTjournal: Magazine suisse sur les technologies de l'information et de la communication, destiné aux professionnels du secteur IT.
-
-LSA: Magazine spécialisé dans le commerce et la consommation, offrant des informations sur les tendances du retail et de la grande distribution.
-
-24 Heures: Quotidien suisse couvrant l'actualité générale, avec un accent sur les événements suisses et internationaux.
-
-Investissement Conseils: Magazine offrant des conseils sur l'investissement, la gestion de patrimoine et les produits financiers.
-
-Caractère: Magazine professionnel pour l'industrie graphique et de l'imprimerie, couvrant les technologies, les marchés et les innovations.
-
-Novethic.fr: Plateforme d'information sur le développement durable et l'investissement socialement responsable.
-
-La Tribune de l'Assurance: Magazine offrant des analyses et des informations sur le marché de l'assurance.
-
-Acteurs Publics: Magazine spécialisé dans l'actualité des secteurs publics et parapublics, abordant la gestion publique, les politiques et les innovations.
-
-La Lettre des Nominations: Publication consacrée aux nominations et mouvements professionnels dans le monde des affaires et de la finance.
-
-La Lettre de l’Expansion: Bulletin économique offrant des informations sur les entreprises, la finance et les tendances économiques.
-
-Maire-Info: Site d'information quotidien destiné aux élus locaux, couvrant les actualités et les enjeux des collectivités locales.
-
-Option Finance: Magazine couvrant l'actualité financière, les marchés, les produits financiers et la gestion d'entreprise.
-
-Silicon.fr: Site d'information sur le secteur des technologies, offrant des nouvelles, des analyses et des études sur l'IT et le numérique.
-
-AWP Analyse Financière: Fournit des analyses et des rapports sur les marchés financiers et les entreprises.
-
-ElectroniqueS.biz: Magazine professionnel dédié à l'industrie électronique, traitant des innovations, des marchés et des technologies.
-
-News Assurances Pro: Site d'information destiné aux professionnels du secteur des assurances, couvrant les actualités, les tendances et les analyses.
-
-Trends/Tendances: Magazine économique belge traitant des affaires, de l'économie, des finances et des tendances du marché.
-
-Le Moniteur des Travaux Publics et du Bâtiment: Un magazine français spécialisé dans le secteur du bâtiment et des travaux publics, offrant des informations sur les projets de construction, la législation et les innovations du secteur.
-
-Ville Rail Transports.com: Site internet consacré au secteur des transports urbains et ferroviaires, offrant des nouvelles et des analyses sur les politiques de transport, les projets d'infrastructure et les technologies.
-
-Le Temps: Journal suisse de référence couvrant l'actualité nationale et internationale, la politique, l'économie, la culture et les sciences.
-
-La Vie du Rail: Magazine dédié au secteur ferroviaire, traitant des actualités des chemins de fer, des innovations technologiques et des politiques de transport.
-
-24 Heures Online: Version en ligne du quotidien suisse "24 Heures", offrant un large éventail d'informations sur l'actualité suisse et internationale.
-
-Maddyness: Magazine en ligne axé sur l'univers des startups et de l'innovation, offrant des informations sur l'entrepreneuriat, les nouvelles technologies et les tendances du marché.
-
-JDN - JournalduNet.com: Site web français traitant de l'économie numérique, des technologies de l'information, du marketing et de la gestion d'entreprise.
-
-Actu-Environnement.com: Site d'information français spécialisé dans les actualités environnementales, abordant des sujets tels que le développement durable, l'énergie et l'écologie.
-
-LSA.fr: Site internet de l'hebdomadaire LSA, spécialisé dans l'actualité de la grande distribution et de la consommation.
-
-Monaco-Matin: Journal couvrant l'actualité de Monaco et de la région, traitant de divers sujets locaux, nationaux et internationaux.
-
-AWP Original Press Releases: Service de diffusion de communiqués de presse, couvrant une variété de sujets d'actualité et d'entreprise.
-
-GreenUnivers: Site d'information sur la transition énergétique et l'économie verte, traitant des sujets d'énergies renouvelables, d'investissement durable et d'innovations écologiques.
-
-LeMoniteur.fr: Version en ligne du magazine "Le Moniteur", spécialisé dans le secteur du bâtiment et des travaux publics en France.
-
-Le Temps Online: Version en ligne du journal "Le Temps", offrant des nouvelles et des analyses sur divers sujets d'actualité.
-
-Zonebourse.com: Site web offrant des informations financières et boursières, des analyses de marché et des conseils en investissement.
-
-Le Journal des Entreprises: Magazine français couvrant l'actualité économique régionale et nationale, destiné aux entrepreneurs et aux décideurs d'entreprise.
-
-Investir-Le Journal des Finances: Hebdomadaire français spécialisé dans les actualités économiques et financières, avec un accent sur les investissements boursiers.
-
-Le Soir: Quotidien belge de langue française couvrant une large gamme de sujets, de l'actualité internationale à la culture.
-
-La Correspondance Economique: Bulletin d'information couvrant l'actualité économique, financière et politique, principalement en France.
-
-BUSINESS IMMO.com: Site web spécialisé dans l'immobilier d'entreprise, offrant des informations sur le marché immobilier, les transactions et les tendances du secteur.
-
-Le Marin.fr: Magazine hebdomadaire français dédié au secteur maritime, couvrant les actualités de la marine marchande, de la pêche et des ports.
-
-L’AGEFI Quotidien: Journal quotidien spécialisé dans l'information financière et économique, destiné aux professionnels de la finance.
-
-AWP Swiss News: Agence de presse suisse fournissant des informations financières et économiques.
-
-Nasdaq / Globenewswire: Service de diffusion de communiqués de presse, principalement axé sur les actualités des entreprises cotées sur le marché boursier Nasdaq.
+Aligning with Long-Term Career Goals: For some, data analysis might align more closely with their long-term career aspirations, perhaps in a managerial or business-oriented role, where the focus is more on applying data insights rather than developing complex data models.
