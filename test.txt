@@ -1,2 +1,3 @@
-Conclusion : A date c’est satisfaisant, 70% sur 200 articles, on reste sur cette version 
-Pour aller plus loin : amélioration des 70% mais cela engage de la labélisation massive que l’on ne peut pas se permettre ajd par manque de temps
+"Conclusion stratégique : À ce stade, les résultats sont positivement alignés avec nos objectifs, atteignant un taux de satisfaction de 70% sur un échantillon de 200 articles. Nous optons pour le maintien de la version actuelle.
+
+Pour aller plus loin : L'amélioration envisagée nécessite une labellisation massive, actuellement limitée par le temps. Priorité à l'efficacité et à la gestion optimale des ressources disponibles."
