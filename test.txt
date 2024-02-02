@@ -1,3 +1,3 @@
-"Conclusion stratégique : À ce stade, les résultats sont positivement alignés avec nos objectifs, atteignant un taux de satisfaction de 70% sur un échantillon de 200 articles. Nous optons pour le maintien de la version actuelle.
+Mesure de la corrélation du sentiment des articles et les cours d’action liés à une contrepartie
+Enjeu : Amélioration des performances de la note de sentiment
 
-Pour aller plus loin : L'amélioration envisagée nécessite une labellisation massive, actuellement limitée par le temps. Priorité à l'efficacité et à la gestion optimale des ressources disponibles."
