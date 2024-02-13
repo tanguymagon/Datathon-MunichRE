@@ -1,3 +1,13 @@
-Mesure de la corrélation du sentiment des articles et les cours d’action liés à une contrepartie
-Enjeu : Amélioration des performances de la note de sentiment
+Maximisez votre veille médiatique avec notre solution de surveillance de presse avancée, conçue pour les professionnels exigeants. Découvrez nos trois fonctionnalités clés, conçues pour transformer la manière dont vous suivez et analysez l'information économique.
+
+Alertes Personnalisées
+Ne manquez jamais une information cruciale sur vos contreparties. Configurez des alertes sur-mesure pour recevoir par email les dernières actualités concernant les entreprises de votre choix. Sélectionnez vos sources préférées, filtrez par tonalité d'article, et ajustez la fréquence des notifications pour une surveillance précise et adaptée à vos besoins.
+
+Recherche Intelligente
+Explorez plus de 130 sources de presse grâce à un moteur de recherche puissant. Que vous recherchiez des informations sur une entreprise spécifique, un dirigeant, ou des insights économiques, notre technologie vous livre les articles les plus récents et économiquement pertinents, tout en ayant la capacité de distinguer et présenter clairement les entités recherchées.
+
+Revue de Presse Centralisée
+Notre plateforme offre une revue de presse économique exhaustive, regroupant des centaines de sources. Visualisez en un coup d'œil les sentiments associés aux articles, les secteurs concernés, et diverses thématiques. Cet espace centralisé est votre meilleur atout pour rester informé et prendre des décisions éclairées dans un environnement économique en constante évolution.
+
+Optez pour notre application de surveillance de presse et équipez-vous d'un outil décisionnel de pointe, conçu pour anticiper les risques et saisir les opportunités dans le paysage médiatique actuel.
 
