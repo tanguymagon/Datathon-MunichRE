@@ -1,13 +1,38 @@
-Maximisez votre veille médiatique avec notre solution de surveillance de presse avancée, conçue pour les professionnels exigeants. Découvrez nos trois fonctionnalités clés, conçues pour transformer la manière dont vous suivez et analysez l'information économique.
 
-Alertes Personnalisées
-Ne manquez jamais une information cruciale sur vos contreparties. Configurez des alertes sur-mesure pour recevoir par email les dernières actualités concernant les entreprises de votre choix. Sélectionnez vos sources préférées, filtrez par tonalité d'article, et ajustez la fréquence des notifications pour une surveillance précise et adaptée à vos besoins.
+À partir de la restitution des entretiens utilisateurs pour l'application GoldenEye, nous allons organiser les recommandations en initiatives, épiques, et tickets afin de structurer les actions à entreprendre pour améliorer l'expérience utilisateur. Voici un résumé des points clés et une proposition de structure pour ces éléments.
 
-Recherche Intelligente
-Explorez plus de 130 sources de presse grâce à un moteur de recherche puissant. Que vous recherchiez des informations sur une entreprise spécifique, un dirigeant, ou des insights économiques, notre technologie vous livre les articles les plus récents et économiquement pertinents, tout en ayant la capacité de distinguer et présenter clairement les entités recherchées.
+Initiative 1: Améliorer la navigation et l'accessibilité
+Épique 1.1: Amélioration de la fermeture des détails d'actualité
+Ticket 1.1.1: Ajouter une indication visuelle claire pour la fermeture de l'article (par exemple, une croix plus visible et la possibilité de cliquer en dehors de l'article pour fermer).
+Épique 1.2: Améliorer le contraste pour l'accessibilité
+Ticket 1.2.1: Augmenter le contraste entre le texte et le fond conformément aux recommandations d'accessibilité (utiliser la couleur #666666 pour le texte).
+Initiative 2: Optimisation de l'utilisation des filtres
+Épique 2.1: Clarification et promotion de l'utilisation des filtres
+Ticket 2.1.1: Éduquer les utilisateurs sur l'utilité et l'efficacité des filtres via un tutoriel ou des tooltips.
+Initiative 3: Amélioration de la page d'accueil
+Épique 3.1: Enrichissement des actualités régionales
 
-Revue de Presse Centralisée
-Notre plateforme offre une revue de presse économique exhaustive, regroupant des centaines de sources. Visualisez en un coup d'œil les sentiments associés aux articles, les secteurs concernés, et diverses thématiques. Cet espace centralisé est votre meilleur atout pour rester informé et prendre des décisions éclairées dans un environnement économique en constante évolution.
+Ticket 3.1.1: Assurer la pertinence des articles régionaux affichés.
+Ticket 3.1.2: Afficher un message en l'absence d'articles récents pour une région.
+Épique 3.2: Optimisation de la section "Mes contreparties"
 
-Optez pour notre application de surveillance de presse et équipez-vous d'un outil décisionnel de pointe, conçu pour anticiper les risques et saisir les opportunités dans le paysage médiatique actuel.
+Ticket 3.2.1: Ajouter clairement le nom de la contrepartie dans l'aperçu des articles.
+Initiative 4: Amélioration de la recherche et des résultats
+Épique 4.1: Adapter l'affichage aux différents écrans
 
+Ticket 4.1.1: Optimiser l'affichage des résultats de recherche en fonction de la résolution et du zoom de l'écran.
+Épique 4.2: Clarification des sections "Actualités" et "Les plus pertinents"
+
+Ticket 4.2.1: Rendre visible l'accès aux différentes sections dès le chargement de la page de résultats.
+Initiative 5: Révision et amélioration du parcours de première connexion
+Épique 5.1: Optimisation de la sélection des secteurs et contreparties
+Ticket 5.1.1: Améliorer la visibilité des tuiles sélectionnées.
+Ticket 5.1.2: Clarifier l'avantage de la liste de suivi lors de la sélection.
+Initiative 6: Communication et formation des utilisateurs
+Épique 6.1: Améliorer la communication sur les évolutions de l'application
+Ticket 6.1.1: Informer les utilisateurs des nouvelles fonctionnalités et corrections via un système de notifications intégré.
+Ticket 6.1.2: Proposer un tutoriel global sur les fonctionnalités clés.
+Initiative 7: Paramétrage et personnalisation des alertes et newsletters
+Épique 7.1: Personnalisation du timing et du contenu de la newsletter
+Ticket 7.1.1: Permettre aux utilisateurs de choisir l'heure de réception de la newsletter.
+Ticket 7.1.2: Optimiser l'affichage des articles concernant plusieurs contreparties pour éviter les doublons.
